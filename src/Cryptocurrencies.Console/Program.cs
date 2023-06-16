@@ -1,8 +1,7 @@
-﻿using Cryptocurrencies.Contracts.Responses;
-using Cryptocurrencies.Infrastructure.Apis;
+﻿using Cryptocurrencies.Infrastructure.Apis;
 
 ICoinCapApi api = new CoinCapApi(new HttpClient());
-GetAssetsResponse response = await api.GetAssetsAsync();
+var response = await api.GetMarketsAsync("ethereum");
 
 foreach (var item in response.Data)
 {
