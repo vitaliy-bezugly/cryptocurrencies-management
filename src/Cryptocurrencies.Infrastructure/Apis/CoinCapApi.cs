@@ -31,4 +31,16 @@ public class CoinCapApi : ApiBase, ICoinCapApi
         GetMarketsResponse response = await GetAsync<GetMarketsResponse>($"https://api.coincap.io/v2/assets/{id}/markets");
         return response;
     }
+
+    public async Task<GetRatesResponse> GetRatesAsync()
+    {
+        GetRatesResponse response = await GetAsync<GetRatesResponse>("https://api.coincap.io/v2/rates");
+        return response;
+    }
+
+    public async Task<GetRateResponse> GetRateByIdAsync(string id)
+    {
+        GetRateResponse response = await GetAsync<GetRateResponse>($"https://api.coincap.io/v2/rates/{id}");
+        return response;
+    }
 }
