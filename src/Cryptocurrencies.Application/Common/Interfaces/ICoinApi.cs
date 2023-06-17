@@ -1,8 +1,8 @@
 using Cryptocurrencies.Contracts.Responses;
 
-namespace Cryptocurrencies.Infrastructure.Apis;
+namespace Cryptocurrencies.Application.Common.Interfaces;
 
-public interface ICoinCapApi
+public interface ICoinApi
 {
     Task<GetCoinsResponse> GetCoinsAsync();
     Task<GetCoinResponse> GetCoinByIdAsync(string id);

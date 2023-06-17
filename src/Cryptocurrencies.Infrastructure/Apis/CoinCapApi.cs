@@ -1,46 +1,48 @@
+using Cryptocurrencies.Application.Common.Interfaces;
 using Cryptocurrencies.Contracts.Responses;
+using Cryptocurrencies.Infrastructure.Routes;
 
 namespace Cryptocurrencies.Infrastructure.Apis;
 
-public class CoinCapApi : ApiBase, ICoinCapApi
+public class CoinCapApi : ApiBase, ICoinApi
 {
     public CoinCapApi(HttpClient httpClient) : base(httpClient)
     { }
     
     public async Task<GetCoinsResponse> GetCoinsAsync()
     {
-        GetCoinsResponse collectionResponse = await GetAsync<GetCoinsResponse>("https://api.coincap.io/v2/assets");
+        GetCoinsResponse collectionResponse = await GetAsync<GetCoinsResponse>(ApiRoutes.CoinCap.Coins);
         return collectionResponse;
     }
 
     public async Task<GetCoinResponse> GetCoinByIdAsync(string id)
     {
-        GetCoinResponse response = await GetAsync<GetCoinResponse>($"https://api.coincap.io/v2/assets/{id}");
+        GetCoinResponse response = await GetAsync<GetCoinResponse>(ApiRoutes.CoinCap.Coin.Replace("{id}", id));
         return response;
     }
 
     public async Task<GetCoinHistoryResponse> GetCoinHistoryAsync(string id, string interval = "d1")
     {
         GetCoinHistoryResponse response = await GetAsync<GetCoinHistoryResponse>
-            ($"https://api.coincap.io/v2/assets/{id}/history?interval=d1");
+            (ApiRoutes.CoinCap.CoinHistory.Replace("{id}", id) + $"?interval={interval}");
         return response;
     }
 
     public async Task<GetMarketsResponse> GetMarketsAsync(string id)
     {
-        GetMarketsResponse response = await GetAsync<GetMarketsResponse>($"https://api.coincap.io/v2/assets/{id}/markets");
+        GetMarketsResponse response = await GetAsync<GetMarketsResponse>(ApiRoutes.CoinCap.Markets.Replace("{id}", id));
         return response;
     }
 
     public async Task<GetRatesResponse> GetRatesAsync()
     {
-        GetRatesResponse response = await GetAsync<GetRatesResponse>("https://api.coincap.io/v2/rates");
+        GetRatesResponse response = await GetAsync<GetRatesResponse>(ApiRoutes.CoinCap.Rates);
         return response;
     }
 
     public async Task<GetRateResponse> GetRateByIdAsync(string id)
     {
-        GetRateResponse response = await GetAsync<GetRateResponse>($"https://api.coincap.io/v2/rates/{id}");
+        GetRateResponse response = await GetAsync<GetRateResponse>(ApiRoutes.CoinCap.Rate.Replace("{id}", id));
         return response;
     }
 }

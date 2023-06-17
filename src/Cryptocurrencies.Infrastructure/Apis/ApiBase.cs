@@ -2,7 +2,7 @@ using System.Text.Json;
 
 namespace Cryptocurrencies.Infrastructure.Apis;
 
-public abstract class ApiBase : IDisposable
+public abstract class ApiBase
 {
     private readonly HttpClient _httpClient;
 
@@ -14,16 +14,13 @@ public abstract class ApiBase : IDisposable
     protected async Task<T> GetAsync<T>(string url)
     {
         var response = await _httpClient.GetAsync(url);
+        
         response.EnsureSuccessStatusCode();
+        
         var content = await response.Content.ReadAsStringAsync();
         return JsonSerializer.Deserialize<T>(content, new JsonSerializerOptions
         {
             PropertyNameCaseInsensitive = true
         })!;
-    }
-
-    public void Dispose()
-    {
-        _httpClient.Dispose();
     }
 }

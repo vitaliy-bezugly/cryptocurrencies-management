@@ -7,11 +7,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Cryptocurrencies.Contracts\Cryptocurrencies.Contracts.csproj" />
+      <ProjectReference Include="..\Cryptocurrencies.Application\Cryptocurrencies.Application.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Services" />
+      <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
     </ItemGroup>
 
 </Project>
