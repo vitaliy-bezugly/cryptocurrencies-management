@@ -17,7 +17,8 @@ public class CoinCapApi : ApiBase, ICoinApi
 
     public async Task<GetCoinResponse> GetCoinByIdAsync(string id)
     {
-        GetCoinResponse response = await GetAsync<GetCoinResponse>(ApiRoutes.CoinCap.Coin.Replace("{id}", id));
+        GetCoinResponse response = await GetAsync<GetCoinResponse>
+            (ApiRoutes.CoinCap.Coin.Replace("{id}", id));
         return response;
     }
 
@@ -28,9 +29,10 @@ public class CoinCapApi : ApiBase, ICoinApi
         return response;
     }
 
-    public async Task<GetMarketsResponse> GetMarketsAsync(string id)
+    public async Task<GetMarketsResponse> GetMarketsAsync(string id, int limit = 10)
     {
-        GetMarketsResponse response = await GetAsync<GetMarketsResponse>(ApiRoutes.CoinCap.Markets.Replace("{id}", id));
+        GetMarketsResponse response = await GetAsync<GetMarketsResponse>
+            (ApiRoutes.CoinCap.Markets.Replace("{id}", id), limit);
         return response;
     }
 
@@ -42,7 +44,8 @@ public class CoinCapApi : ApiBase, ICoinApi
 
     public async Task<GetRateResponse> GetRateByIdAsync(string id)
     {
-        GetRateResponse response = await GetAsync<GetRateResponse>(ApiRoutes.CoinCap.Rate.Replace("{id}", id));
+        GetRateResponse response = await GetAsync<GetRateResponse>
+            (ApiRoutes.CoinCap.Rate.Replace("{id}", id));
         return response;
     }
 }
