@@ -5,8 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Cryptocurrencies.DesktopUi"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="300" Width="500"
+        FontSize="16">
     <Grid>
-
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button x:Name="GetDataButton" Margin="10" Padding="10, 5" Click="GetDataButton_OnClick">Get data</Button>
+            <TextBlock x:Name="Data" Margin="10"></TextBlock>
+        </StackPanel>
     </Grid>
 </Window>
