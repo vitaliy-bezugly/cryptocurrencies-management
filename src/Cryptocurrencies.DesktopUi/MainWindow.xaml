@@ -19,7 +19,8 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             
-            <Border>
+            <!-- Menu -->
+            <Border Grid.Column="0">
                 <Border.Background>
                     <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
                         <GradientStop Color="#1d212c" Offset="0"></GradientStop>
@@ -68,6 +69,32 @@
                     </Button>
                 </StackPanel>
             </Border>
+            
+            <Grid Grid.Column="1" Margin="50 35 50 35">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                
+                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                    <TextBlock Text="Currencies" FontSize="26"></TextBlock>
+                </StackPanel>
+                
+                <Grid Grid.Row="1" Margin="0 20 0 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="540"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <Border Grid.Column="0" Background="#d7e5f5" CornerRadius="20">
+                        
+                    </Border>
+                    
+                    <Border Grid.Column="1" Background="#54a4ff" Margin="20 0 0 0" CornerRadius="20">
+                        
+                    </Border>
+                </Grid>
+            </Grid>
         </Grid>
     </Border>
 </Window>
