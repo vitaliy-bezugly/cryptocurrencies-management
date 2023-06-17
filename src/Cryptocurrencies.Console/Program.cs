@@ -1,5 +1,5 @@
 ﻿using Cryptocurrencies.Application;
-using Cryptocurrencies.Application.Markets.GetMarketsPerCoinQuery;
+using Cryptocurrencies.Application.Rates.GetRateByIdQuery;
 using Cryptocurrencies.Infrastructure;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,11 +22,8 @@ using(host.Services.CreateScope())
     var services = host.Services;
     var mediator = services.GetRequiredService<IMediator>();
     
-    var markets = await mediator.Send(new GetMarketsPerCoinQuery("bitcoin", 20));
-    foreach (var history in markets)
-    {
-        Console.WriteLine(history);
-    }
+    var rate = await mediator.Send(new GetRateByIdQuery("ukrainian-hryvnia"));
+    Console.WriteLine(rate);
 }
 
 await host.StopAsync();
