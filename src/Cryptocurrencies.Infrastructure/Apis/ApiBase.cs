@@ -11,8 +11,11 @@ public abstract class ApiBase
         _httpClient = httpClient;
     }
     
-    protected async Task<T> GetAsync<T>(string url)
+    protected async Task<T> GetAsync<T>(string url, int? limit = null)
     {
+        if(limit is not null)
+            url += "?limit=" + limit;
+        
         var response = await _httpClient.GetAsync(url);
         
         response.EnsureSuccessStatusCode();

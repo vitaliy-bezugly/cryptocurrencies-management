@@ -25,7 +25,7 @@ public class PerformanceBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequ
 
         var elapsedMilliseconds = _timer.ElapsedMilliseconds;
 
-        if (elapsedMilliseconds > 500)
+        if (elapsedMilliseconds > 1000)
         {
             var requestName = typeof(TRequest).Name;
             _logger.LogWarning($"Long Running Request: {requestName} ({elapsedMilliseconds} milliseconds) {request}");

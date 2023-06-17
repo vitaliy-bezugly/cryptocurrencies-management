@@ -1,11 +1,12 @@
 ﻿using Cryptocurrencies.Application;
-using Cryptocurrencies.Application.Common.Interfaces;
+using Cryptocurrencies.Application.Coins.GetAllCoinsQuery;
 using Cryptocurrencies.Infrastructure;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 IHost host = Host.CreateDefaultBuilder(args)
-    .ConfigureServices((hostContext, services) =>
+    .ConfigureServices((services) =>
     {
         services.AddLogging();
         
@@ -19,11 +20,13 @@ await host.StartAsync();
 using(host.Services.CreateScope())
 {
     var services = host.Services;
-    var api = services.GetRequiredService<ICoinApi>();
-    var response = await api.GetRateByIdAsync("ethereum");
-
-    Console.WriteLine(response.Data);
-    Console.WriteLine($"Timestamp: {response.Timestamp}");
+    var mediator = services.GetRequiredService<IMediator>();
+    
+    var coins = await mediator.Send(new GetAllCoinsQuery(20));
+    foreach (var coin in coins)
+    {
+        Console.WriteLine(coin);
+    }
 }
 
 await host.StopAsync();

@@ -9,9 +9,9 @@ public class CoinCapApi : ApiBase, ICoinApi
     public CoinCapApi(HttpClient httpClient) : base(httpClient)
     { }
     
-    public async Task<GetCoinsResponse> GetCoinsAsync()
+    public async Task<GetCoinsResponse> GetCoinsAsync(int limit = 10)
     {
-        GetCoinsResponse collectionResponse = await GetAsync<GetCoinsResponse>(ApiRoutes.CoinCap.Coins);
+        GetCoinsResponse collectionResponse = await GetAsync<GetCoinsResponse>(ApiRoutes.CoinCap.Coins, limit);
         return collectionResponse;
     }
 
