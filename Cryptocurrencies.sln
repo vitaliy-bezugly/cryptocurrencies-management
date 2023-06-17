@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cryptocurrencies.Console", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cryptocurrencies.Application", "src\Cryptocurrencies.Application\Cryptocurrencies.Application.csproj", "{C0EC4B3F-A720-4CF3-99B4-84CADB040720}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cryptocurrencies.DesktopUi", "src\Cryptocurrencies.DesktopUi\Cryptocurrencies.DesktopUi.csproj", "{5CDD49CE-8D9C-4F08-9DAD-E0C50D51CBDD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +22,7 @@ Global
 		{BBB20CAD-68C1-4067-9EAC-1B83B357D058} = {AD56E944-3CEB-4B18-A224-4955070450D8}
 		{E21F49C7-83E8-4BF1-ACB4-89C0C18E9658} = {AD56E944-3CEB-4B18-A224-4955070450D8}
 		{C0EC4B3F-A720-4CF3-99B4-84CADB040720} = {AD56E944-3CEB-4B18-A224-4955070450D8}
+		{5CDD49CE-8D9C-4F08-9DAD-E0C50D51CBDD} = {AD56E944-3CEB-4B18-A224-4955070450D8}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{38BC045E-1CF0-4B82-BADA-998B806287EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -38,5 +41,9 @@ Global
 		{C0EC4B3F-A720-4CF3-99B4-84CADB040720}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0EC4B3F-A720-4CF3-99B4-84CADB040720}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0EC4B3F-A720-4CF3-99B4-84CADB040720}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CDD49CE-8D9C-4F08-9DAD-E0C50D51CBDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CDD49CE-8D9C-4F08-9DAD-E0C50D51CBDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CDD49CE-8D9C-4F08-9DAD-E0C50D51CBDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CDD49CE-8D9C-4F08-9DAD-E0C50D51CBDD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
