@@ -1,23 +1,16 @@
-﻿using System;
-using System.Windows;
-using Cryptocurrencies.Application.Rates.GetRateByIdQuery;
+﻿using System.Windows;
+using System.Windows.Input;
 using MediatR;
 
-namespace Cryptocurrencies.DesktopUi
-{
-    public partial class MainWindow : Window
-    {
-        private readonly IMediator _mediator;
-        public MainWindow(IMediator mediator)
-        {
-            _mediator = mediator;
-            InitializeComponent();
-        }
+namespace Cryptocurrencies.DesktopUi;
 
-        private async void GetDataButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            var rate = await _mediator.Send(new GetRateByIdQuery("ukrainian-hryvnia"));
-            Data.Text = rate.ToString();
-        }
+public partial class MainWindow : Window
+{
+    private readonly IMediator _mediator;
+    
+    public MainWindow(IMediator mediator)
+    {
+        _mediator = mediator;
+        InitializeComponent();
     }
 }

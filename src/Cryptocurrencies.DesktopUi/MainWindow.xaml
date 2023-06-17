@@ -3,14 +3,57 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Cryptocurrencies.DesktopUi"
         mc:Ignorable="d"
-        Title="MainWindow" Height="300" Width="500"
+        Title="Main window" 
+        Height="765" Width="1168"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="SingleBorderWindow"
+        Background="Transparent"
+        ResizeMode="CanResize"
         FontSize="16">
-    <Grid>
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button x:Name="GetDataButton" Margin="10" Padding="10, 5" Click="GetDataButton_OnClick">Get data</Button>
-            <TextBlock x:Name="Data" Margin="10"></TextBlock>
-        </StackPanel>
-    </Grid>
+        
+    <Border Background="#f5f3fb">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="290"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <Border>
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0.5, 0" EndPoint="0.5, 1">
+                        <GradientStop Color="#1d212c" Offset="0"></GradientStop>
+                        <GradientStop Color="#1f355e" Offset="1"></GradientStop>
+                    </LinearGradientBrush>
+                </Border.Background>
+                
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="0 35 0 0">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="assets/images/mainicon.png" Width="42" Margin="0 0 10 0"></Image>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="Crypto Management" Foreground="#ffffff" FontSize="22"></TextBlock>
+                            <TextBlock FontSize="12" Foreground="Gray">Beta v1.0</TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                    
+                    <Separator Height="0.8" Margin="20 30" Background="#46558a"/>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="10 0 10 10">
+                        <Image Source="assets/images/currency.png" Width="32" Margin="0 0 10 0"></Image>
+                        <TextBlock Text="Currencies" Foreground="#ffffff" FontSize="18"></TextBlock>
+                    </StackPanel>
+                    
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="10">
+                        <Image Source="assets/images/search.png" Width="32" Margin="0 0 10 0"></Image>
+                        <TextBlock Text="Search" Foreground="#ffffff" FontSize="18"></TextBlock>
+                    </StackPanel>
+                    
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="10">
+                        <Image Source="assets/images/convert.png" Width="32" Margin="0 0 10 0"></Image>
+                        <TextBlock Text="Convert" Foreground="#ffffff" FontSize="18"></TextBlock>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Border>
 </Window>
