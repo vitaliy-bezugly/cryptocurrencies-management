@@ -37,21 +37,35 @@
                     </StackPanel>
                     
                     <Separator Height="0.8" Margin="20 30" Background="#46558a"/>
-
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="10 0 10 10">
-                        <Image Source="assets/images/currency.png" Width="32" Margin="0 0 10 0"></Image>
-                        <TextBlock Text="Currencies" Foreground="#ffffff" FontSize="18"></TextBlock>
-                    </StackPanel>
                     
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="10">
-                        <Image Source="assets/images/search.png" Width="32" Margin="0 0 10 0"></Image>
-                        <TextBlock Text="Search" Foreground="#ffffff" FontSize="18"></TextBlock>
-                    </StackPanel>
+                    <Button Style="{StaticResource MenuButton}" Margin="0 0 0 0">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="assets/images/currency.png" Style="{StaticResource MenuButtonIcon}"></Image>
+                            <TextBlock Text="Currencies" Style="{StaticResource MenuButtonText}"></TextBlock>
+                        </StackPanel>
+                    </Button>
                     
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="10">
-                        <Image Source="assets/images/convert.png" Width="32" Margin="0 0 10 0"></Image>
-                        <TextBlock Text="Convert" Foreground="#ffffff" FontSize="18"></TextBlock>
-                    </StackPanel>
+                    
+                    <Button Style="{StaticResource MenuButton}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="assets/images/search.png" Style="{StaticResource MenuButtonIcon}"></Image>
+                            <TextBlock Text="Search" Style="{StaticResource MenuButtonText}"></TextBlock>
+                        </StackPanel>
+                    </Button>
+                    
+                    <Button Style="{StaticResource MenuButton}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="assets/images/convert.png" Style="{StaticResource MenuButtonIcon}"></Image>
+                            <TextBlock Text="Convert" Style="{StaticResource MenuButtonText}"></TextBlock>
+                        </StackPanel>
+                    </Button>
+                    
+                    <Button Style="{StaticResource MenuButton}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="assets/images/market.png" Style="{StaticResource MenuButtonIcon}"></Image>
+                            <TextBlock Text="Markets" Style="{StaticResource MenuButtonText}"></TextBlock>
+                        </StackPanel>
+                    </Button>
                 </StackPanel>
             </Border>
         </Grid>

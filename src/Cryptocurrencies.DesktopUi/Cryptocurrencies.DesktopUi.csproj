@@ -17,21 +17,13 @@
     </ItemGroup>
 
     <ItemGroup>
-      <None Remove="assets\images\coin-pixel.png" />
-      <None Remove="assets\images\currency.png" />
       <Resource Include="assets\images\currency.png" />
-      <None Remove="assets\images\price.png" />
       <Resource Include="assets\images\price.png" />
-      <None Remove="assets\images\search.png" />
       <Resource Include="assets\images\search.png" />
-      <None Remove="assets\images\icon.png" />
       <Resource Include="assets\images\mainicon.png" />
-      <None Remove="assets\images\convert.png" />
       <Resource Include="assets\images\convert.png" />
-      <None Remove="assets\images\TRX.png" />
-      <Resource Include="assets\images\TRX.png" />
-      <None Remove="assets\images\exit.png" />
       <Resource Include="assets\images\exit.png" />
+      <Resource Include="assets\images\market.png" />
     </ItemGroup>
 
 </Project>
