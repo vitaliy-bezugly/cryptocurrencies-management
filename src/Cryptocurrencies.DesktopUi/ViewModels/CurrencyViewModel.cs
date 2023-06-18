@@ -1,8 +1,5 @@
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Cryptocurrencies.Application.Coins.GetCoinHistoryQuery;
 using Cryptocurrencies.Application.Coins.GetCoinQuery;
@@ -12,7 +9,7 @@ using MediatR;
 
 namespace Cryptocurrencies.DesktopUi.ViewModels;
 
-public class CurrencyViewModel : INotifyPropertyChanged
+public class CurrencyViewModel : ViewModelBase
 {
     private readonly IMediator _mediator;
     private CoinModel _model;
@@ -40,7 +37,7 @@ public class CurrencyViewModel : INotifyPropertyChanged
     
     public async Task FindMarketsByCurrencyIdAsync()
     {
-        var markets = await _mediator.Send(new GetMarketsPerCoinQuery(_currencyId, 10));
+        var markets = await _mediator.Send(new GetMarketsPerCoinQuery(_currencyId));
         
         _markets.Clear();
         foreach (var market in markets)
@@ -82,20 +79,5 @@ public class CurrencyViewModel : INotifyPropertyChanged
     {
         get => _history;
         set => SetField(ref _history, value);
-    }
-
-    public event PropertyChangedEventHandler? PropertyChanged;
-
-    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
-
-    protected bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
-    {
-        if (EqualityComparer<T>.Default.Equals(field, value)) return false;
-        field = value;
-        OnPropertyChanged(propertyName);
-        return true;
     }
 }
