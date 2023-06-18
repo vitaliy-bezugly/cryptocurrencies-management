@@ -7,11 +7,13 @@ public partial class MainWindow : Window
 {
     private readonly CoinsPage _coinsPage;
     private readonly CurrencyPage _currencyPage;
-    public MainWindow(CoinsPage coinsPage, CurrencyPage currencyPage)
+    private readonly ConvertPage _convertPage;
+    public MainWindow(CoinsPage coinsPage, CurrencyPage currencyPage, ConvertPage convertPage)
     {
         _coinsPage = coinsPage;
         _currencyPage = currencyPage;
-        
+        _convertPage = convertPage;
+
         InitializeComponent();
 
         Frame.NavigationService.Navigate(coinsPage);
@@ -29,6 +31,6 @@ public partial class MainWindow : Window
 
     private void ConvertButton_OnClick(object sender, RoutedEventArgs e)
     {
-        // throw new NotImplementedException();
+        Frame.NavigationService.Navigate(_convertPage);
     }
 }

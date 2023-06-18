@@ -1,0 +1,20 @@
+<Page x:Class="Cryptocurrencies.DesktopUi.Views.ConvertPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:Cryptocurrencies.DesktopUi.Views"
+      mc:Ignorable="d"
+      FontSize="20"
+      Title="ConvertPage">
+    <StackPanel>
+        <TextBlock>Search: </TextBlock>
+        <TextBox Text="{Binding AmountOfCurrency}"></TextBox>
+        <TextBox MinWidth="130" Text="{Binding FromCurrency}"></TextBox>
+        
+        <Button Margin="0 10" Click="ButtonBase_OnClick">Convert to $</Button>
+        
+        <TextBlock Margin="0 20 0 0">Amount of dollars: </TextBlock>
+        <TextBlock Text="{Binding AmountOfDollars}"></TextBlock>
+    </StackPanel>
+</Page>
