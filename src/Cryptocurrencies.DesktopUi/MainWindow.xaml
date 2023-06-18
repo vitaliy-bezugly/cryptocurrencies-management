@@ -41,7 +41,8 @@
                     
                     <Separator Height="0.8" Margin="20 30" Background="#46558a"/>
                     
-                    <Button x:Name="HomePageButton" Style="{StaticResource MenuButton}" Margin="0 0 0 0">
+                    <Button x:Name="HomePageButton" Style="{StaticResource MenuButton}" Margin="0 0 0 0"
+                            Command="{Binding GoToCoinsCommand}">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="assets/images/currency.png" Style="{StaticResource MenuButtonIcon}"></Image>
                             <TextBlock Text="Currencies" Style="{StaticResource MenuButtonText}"></TextBlock>
@@ -57,7 +58,8 @@
                         </StackPanel>
                     </Button>
                     
-                    <Button x:Name="ConvertPageButton" Style="{StaticResource MenuButton}">
+                    <Button x:Name="ConvertPageButton" Style="{StaticResource MenuButton}"
+                            Command="{Binding GoToConvertCommand}">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="assets/images/convert.png" Style="{StaticResource MenuButtonIcon}"></Image>
                             <TextBlock Text="Convert" Style="{StaticResource MenuButtonText}"></TextBlock>
