@@ -1,8 +1,10 @@
 using System.Text.Json.Serialization;
+using Cryptocurrencies.Application.Common.Mappings;
+using Cryptocurrencies.Contracts.Dtos;
 
-namespace Cryptocurrencies.Contracts.Models;
+namespace Cryptocurrencies.Application.Common.Models;
 
-public record CoinHistoryModel
+public record CoinHistoryModel : IMapFrom<CoinHistoryDto>
 {
     [JsonPropertyName("priceUsd")]
     public string PriceUsd { get; set; } = string.Empty;

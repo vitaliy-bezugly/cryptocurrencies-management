@@ -1,6 +1,6 @@
-using Cryptocurrencies.Contracts.Models;
+using Cryptocurrencies.Contracts.Dtos;
 
 namespace Cryptocurrencies.Contracts.Responses;
 
-public class GetRateResponse : ResponseBase<RateModel>
+public class GetRateResponse : ResponseBase<RateDto>
 { }

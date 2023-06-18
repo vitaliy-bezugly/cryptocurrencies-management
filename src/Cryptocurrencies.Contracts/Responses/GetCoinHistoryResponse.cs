@@ -1,6 +1,6 @@
-using Cryptocurrencies.Contracts.Models;
+using Cryptocurrencies.Contracts.Dtos;
 
 namespace Cryptocurrencies.Contracts.Responses;
 
-public class GetCoinHistoryResponse: CollectionResponseBase<CoinHistoryModel>
+public class GetCoinHistoryResponse: CollectionResponseBase<CoinHistoryDto>
 { }

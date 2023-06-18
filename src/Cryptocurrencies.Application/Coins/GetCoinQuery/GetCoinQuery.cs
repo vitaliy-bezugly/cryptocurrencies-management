@@ -1,4 +1,4 @@
-using Cryptocurrencies.Contracts.Models;
+using Cryptocurrencies.Application.Common.Models;
 using MediatR;
 
 namespace Cryptocurrencies.Application.Coins.GetCoinQuery;

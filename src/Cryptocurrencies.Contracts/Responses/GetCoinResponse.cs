@@ -1,7 +1,6 @@
-using System.Text.Json.Serialization;
-using Cryptocurrencies.Contracts.Models;
+using Cryptocurrencies.Contracts.Dtos;
 
 namespace Cryptocurrencies.Contracts.Responses;
 
-public class GetCoinResponse : ResponseBase<CoinModel>
+public class GetCoinResponse : ResponseBase<CoinDto>
 { }

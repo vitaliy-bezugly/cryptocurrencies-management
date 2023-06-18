@@ -1,5 +1,5 @@
 using System.Text;
-using Cryptocurrencies.Contracts.Models;
+using Cryptocurrencies.Application.Common.Models;
 using MediatR;
 
 namespace Cryptocurrencies.Application.Rates.GetAllRatesQuery;

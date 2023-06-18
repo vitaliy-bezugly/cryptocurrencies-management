@@ -1,8 +1,10 @@
 using System.Text.Json.Serialization;
+using Cryptocurrencies.Application.Common.Mappings;
+using Cryptocurrencies.Contracts.Dtos;
 
-namespace Cryptocurrencies.Contracts.Models;
+namespace Cryptocurrencies.Application.Common.Models;
 
-public record CoinModel
+public record CoinModel : IMapFrom<CoinDto>
 {
     [JsonPropertyName("id")]
     public string Id { get; init; } = string.Empty;
