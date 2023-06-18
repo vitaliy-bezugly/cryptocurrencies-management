@@ -1,3 +1,5 @@
+using Cryptocurrencies.DesktopUi.ViewModels;
+using Cryptocurrencies.DesktopUi.Views;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
@@ -14,6 +16,11 @@ public static class ServiceConfigurator
         });
 
         services.AddSingleton<MainWindow>();
+        
+        services.AddTransient<CoinsPage>();
+        services.AddTransient<CoinsViewModel>();
+        
+        services.AddTransient<CurrencyPage>();
         
         return services;
     }

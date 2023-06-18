@@ -1,0 +1,27 @@
+<Page x:Class="Cryptocurrencies.DesktopUi.Views.CoinsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:Cryptocurrencies.DesktopUi.Views"
+      mc:Ignorable="d"
+      FontSize="20"
+      Title="CoinsPage">
+    <StackPanel>
+        <TextBlock Margin="0 10">Hello from Coins page!</TextBlock>
+            
+        <Button Margin="0 10" Content="Load data" Width="120" HorizontalAlignment="Left" Click="ButtonBase_OnClick"></Button>
+            
+        <!-- Datagrid -->
+        <DataGrid Name="CoinsDataGrid" AutoGenerateColumns="False" ItemsSource="{Binding Coins}" 
+                  FontSize="16" ColumnWidth="*">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}"/>
+                <DataGridTextColumn Header="Symbol" Binding="{Binding Path=Symbol}"/>
+                <DataGridHyperlinkColumn Header="Price USD" Binding="{Binding Path=PriceUsd}"/>
+                <DataGridTextColumn Header="Supply" Binding="{Binding Path=Supply}"/>
+                <DataGridTextColumn Header="Market Cap" Binding="{Binding Path=MarketCapUsd}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </StackPanel>
+</Page>

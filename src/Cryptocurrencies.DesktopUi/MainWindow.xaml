@@ -3,13 +3,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Cryptocurrencies.DesktopUi"
         mc:Ignorable="d"
         Title="Main window" 
-        Height="765" Width="1168"
-        WindowStartupLocation="CenterScreen"
+        WindowState="Maximized"
         WindowStyle="SingleBorderWindow"
         Background="Transparent"
         ResizeMode="CanResize"
+        SizeToContent="WidthAndHeight"
+        MinWidth="900" MinHeight="555"
         FontSize="16">
         
     <Border Background="#f5f3fb">
@@ -39,7 +41,7 @@
                     
                     <Separator Height="0.8" Margin="20 30" Background="#46558a"/>
                     
-                    <Button Style="{StaticResource MenuButton}" Margin="0 0 0 0">
+                    <Button x:Name="HomePageButton" Style="{StaticResource MenuButton}" Margin="0 0 0 0" Click="HomePageButton_OnClick">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="assets/images/currency.png" Style="{StaticResource MenuButtonIcon}"></Image>
                             <TextBlock Text="Currencies" Style="{StaticResource MenuButtonText}"></TextBlock>
@@ -47,14 +49,14 @@
                     </Button>
                     
                     
-                    <Button Style="{StaticResource MenuButton}">
+                    <Button x:Name="CurrencyPageButton" Style="{StaticResource MenuButton}" Click="CurrencyPageButton_OnClick">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="assets/images/search.png" Style="{StaticResource MenuButtonIcon}"></Image>
                             <TextBlock Text="Search" Style="{StaticResource MenuButtonText}"></TextBlock>
                         </StackPanel>
                     </Button>
                     
-                    <Button Style="{StaticResource MenuButton}">
+                    <Button x:Name="ConvertPageButton" Style="{StaticResource MenuButton}" Click="ConvertButton_OnClick">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="assets/images/convert.png" Style="{StaticResource MenuButtonIcon}"></Image>
                             <TextBlock Text="Convert" Style="{StaticResource MenuButtonText}"></TextBlock>
@@ -70,31 +72,8 @@
                 </StackPanel>
             </Border>
             
-            <Grid Grid.Column="1" Margin="50 35 50 35">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                
-                <StackPanel Grid.Row="0" Orientation="Horizontal">
-                    <TextBlock Text="Currencies" FontSize="26"></TextBlock>
-                </StackPanel>
-                
-                <Grid Grid.Row="1" Margin="0 20 0 0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="540"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    
-                    <Border Grid.Column="0" Background="#d7e5f5" CornerRadius="20">
-                        
-                    </Border>
-                    
-                    <Border Grid.Column="1" Background="#54a4ff" Margin="20 0 0 0" CornerRadius="20">
-                        
-                    </Border>
-                </Grid>
-            </Grid>
+            <!-- Pages -->
+            <Frame Grid.Column="1" x:Name="Frame" Margin="50 35 50 35" NavigationUIVisibility="Hidden"></Frame>
         </Grid>
     </Border>
 </Window>
