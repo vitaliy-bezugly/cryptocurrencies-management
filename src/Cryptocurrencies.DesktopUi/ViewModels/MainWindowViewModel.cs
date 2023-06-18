@@ -1,17 +1,18 @@
 using System.Windows.Input;
 using Cryptocurrencies.DesktopUi.Commands;
+using Cryptocurrencies.DesktopUi.DIItems;
 using Cryptocurrencies.DesktopUi.Views;
 
 namespace Cryptocurrencies.DesktopUi.ViewModels;
 
 public class MainWindowViewModel : ViewModelBase
 {
-    private readonly FrameContainer _frameContainer;
+    private readonly IFrameContainer _frameContainer;
     private readonly CurrencyPage _currencyPage;
     private readonly CoinsPage _coinsPage;
     private readonly ConvertPage _convertPage;
 
-    public MainWindowViewModel(FrameContainer frameContainerContainer, CurrencyPage currencyPage, CoinsPage coinsPage, ConvertPage convertPage)
+    public MainWindowViewModel(IFrameContainer frameContainerContainer, CurrencyPage currencyPage, CoinsPage coinsPage, ConvertPage convertPage)
     {
         _frameContainer = frameContainerContainer;
         _currencyPage = currencyPage;

@@ -1,4 +1,4 @@
-using System.Windows.Controls;
+using Cryptocurrencies.DesktopUi.DIItems;
 using Cryptocurrencies.DesktopUi.ViewModels;
 using Cryptocurrencies.DesktopUi.Views;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,7 +16,7 @@ public static class ServiceConfigurator
             builder.AddDebug();
         });
         
-        services.AddSingleton<FrameContainer>();
+        services.AddSingleton<IFrameContainer, FrameContainer>();
 
         services.AddTransient<MainWindow>();
         services.AddTransient<MainWindowViewModel>();
