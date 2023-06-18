@@ -41,7 +41,7 @@
                     
                     <Separator Height="0.8" Margin="20 30" Background="#46558a"/>
                     
-                    <Button x:Name="HomePageButton" Style="{StaticResource MenuButton}" Margin="0 0 0 0" Click="HomePageButton_OnClick">
+                    <Button x:Name="HomePageButton" Style="{StaticResource MenuButton}" Margin="0 0 0 0">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="assets/images/currency.png" Style="{StaticResource MenuButtonIcon}"></Image>
                             <TextBlock Text="Currencies" Style="{StaticResource MenuButtonText}"></TextBlock>
@@ -49,14 +49,15 @@
                     </Button>
                     
                     
-                    <Button x:Name="CurrencyPageButton" Style="{StaticResource MenuButton}" Click="CurrencyPageButton_OnClick">
+                    <Button x:Name="CurrencyPageButton" Style="{StaticResource MenuButton}"
+                            Command="{Binding GoToCurrencyCommand}">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="assets/images/search.png" Style="{StaticResource MenuButtonIcon}"></Image>
                             <TextBlock Text="Search" Style="{StaticResource MenuButtonText}"></TextBlock>
                         </StackPanel>
                     </Button>
                     
-                    <Button x:Name="ConvertPageButton" Style="{StaticResource MenuButton}" Click="ConvertButton_OnClick">
+                    <Button x:Name="ConvertPageButton" Style="{StaticResource MenuButton}">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="assets/images/convert.png" Style="{StaticResource MenuButtonIcon}"></Image>
                             <TextBlock Text="Convert" Style="{StaticResource MenuButtonText}"></TextBlock>
@@ -73,7 +74,7 @@
             </Border>
             
             <!-- Pages -->
-            <Frame Grid.Column="1" x:Name="Frame" Margin="50 35 50 35" NavigationUIVisibility="Hidden"></Frame>
+            <Frame Grid.Column="1" x:Name="NavigationFrame" Margin="50 35 50 35" NavigationUIVisibility="Hidden"></Frame>
         </Grid>
     </Border>
 </Window>
