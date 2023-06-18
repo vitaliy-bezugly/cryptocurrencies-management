@@ -16,6 +16,9 @@ public partial class CurrencyPage : Page
     private async void Find_OnClick(object sender, RoutedEventArgs e)
     {
         var vm = DataContext as CurrencyViewModel;
+        
         await vm!.FindCurrencyByIdAsync();
+        await vm!.FindMarketsByCurrencyIdAsync();
+        await vm!.FindHistoryByCurrencyIdAsync();
     }
 }

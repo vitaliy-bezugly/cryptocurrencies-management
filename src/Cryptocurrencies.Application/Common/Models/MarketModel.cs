@@ -6,24 +6,19 @@ namespace Cryptocurrencies.Application.Common.Models;
 
 public record MarketModel : IMapFrom<MarketDto>
 {
-    [JsonPropertyName("exchangeId")]
-    public string ExchangeId { get; set; } = string.Empty;
+    public string ExchangeId { get; init; } = string.Empty;
     
-    [JsonPropertyName("baseId")]
-    public string BaseId { get; set; } = string.Empty;
+    public string BaseId { get; init; } = string.Empty;
     
-    [JsonPropertyName("quoteId")]
-    public string QuoteId { get; set; } = string.Empty;
+    public string QuoteId { get; init; } = string.Empty;
     
-    [JsonPropertyName("baseSymbol")]
-    public string BaseSymbol { get; set; } = string.Empty;
+    public string BaseSymbol { get; init; } = string.Empty;
     
-    [JsonPropertyName("quoteSymbol")]
-    public string QuoteSymbol { get; set; } = string.Empty;
+    public string QuoteSymbol { get; init; } = string.Empty;
     
-    [JsonPropertyName("volumeUsd24Hr")]
-    public string VolumeUsd24Hr { get; set; } = string.Empty;
+    public string VolumeUsd24Hr { get; init; } = string.Empty;
+
+    public string PriceUsd { get; init; } = String.Empty;
     
-    [JsonPropertyName("volumePercent")]
-    public string VolumePercent { get; set; } = string.Empty;
+    public string VolumePercent { get; init; } = string.Empty;
 }

@@ -22,6 +22,9 @@ public class MarketDto
     [JsonPropertyName("volumeUsd24Hr")]
     public string VolumeUsd24Hr { get; set; } = string.Empty;
     
+    [JsonPropertyName("priceUsd")]
+    public string PriceUsd { get; init; } = string.Empty;
+    
     [JsonPropertyName("volumePercent")]
     public string VolumePercent { get; set; } = string.Empty;
 }

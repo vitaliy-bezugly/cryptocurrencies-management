@@ -6,9 +6,7 @@ namespace Cryptocurrencies.Application.Common.Models;
 
 public record CoinHistoryModel : IMapFrom<CoinHistoryDto>
 {
-    [JsonPropertyName("priceUsd")]
-    public string PriceUsd { get; set; } = string.Empty;
+    public string PriceUsd { get; init; } = string.Empty;
     
-    [JsonPropertyName("time")]
-    public long Time { get; set; } = 0;
+    public long Time { get; init; } = 0;
 }

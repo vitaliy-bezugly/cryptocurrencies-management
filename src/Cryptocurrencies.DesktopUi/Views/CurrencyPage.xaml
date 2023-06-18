@@ -7,26 +7,56 @@
       mc:Ignorable="d"
       FontSize="20"
       Title="CurrencyPage">
-    <StackPanel>
-        <TextBlock Margin="0 10">Hello from Currency page!</TextBlock>
+    <ScrollViewer>
+        <StackPanel>
+            <TextBlock Margin="0 10">Hello from Currency page!</TextBlock>
 
-        <TextBlock>Search!</TextBlock>
-        <TextBox Text="{Binding CurrencyId}"></TextBox>
-        <Button x:Name="Find" Width="80" HorizontalAlignment="Left" Margin="0 10" Click="Find_OnClick">Find</Button>
-        
-        <TextBlock Margin="0 10">Info</TextBlock>
-        
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3*"></ColumnDefinition>
-                <ColumnDefinition Width="3*"></ColumnDefinition>
-                <ColumnDefinition Width="3*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            
-            <StackPanel Grid.Column="0" Orientation="Horizontal">
-                <TextBlock FontSize="16">Name: </TextBlock>
-                <TextBox Text="{Binding Currency.Name}"></TextBox>
-            </StackPanel>
-        </Grid>
-    </StackPanel>
+            <TextBlock>Search!</TextBlock>
+            <TextBox Text="{Binding CurrencyId}"></TextBox>
+            <Button x:Name="Find" Width="80" HorizontalAlignment="Left" Margin="0 10" Click="Find_OnClick">Find</Button>
+
+            <TextBlock Margin="0 10">Info</TextBlock>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                    <TextBlock FontSize="16">Name: </TextBlock>
+                    <TextBox Text="{Binding Currency.Name}"></TextBox>
+                </StackPanel>
+            </Grid>
+
+            <TextBlock Margin="0 10">History</TextBlock>
+            <ListBox ItemsSource="{Binding History}" Margin="0 10">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Price USD: "></TextBlock>
+                            <TextBlock Text="{Binding PriceUsd}"></TextBlock>
+                            <TextBlock Text="; Time: "></TextBlock>
+                            <TextBlock Text="{Binding Time}"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <TextBlock Margin="0 10">You can buy it on the following markets: </TextBlock>
+            <ListBox ItemsSource="{Binding Markets}" Margin="0 10">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Market: "></TextBlock>
+                            <TextBlock Text="{Binding ExchangeId}"></TextBlock>
+                            <TextBlock Text="; Price: "></TextBlock>
+                            <TextBlock Text="{Binding PriceUsd}"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+    </ScrollViewer>
 </Page>

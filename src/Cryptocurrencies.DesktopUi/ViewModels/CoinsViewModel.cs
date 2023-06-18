@@ -18,7 +18,7 @@ public class CoinsViewModel : INotifyPropertyChanged
     {
         _mediator = mediator;
 
-        _coins = new ObservableCollection<CoinModel>();
+        _coins = GetInitialCoins();
     }
 
     public ObservableCollection<CoinModel> Coins
@@ -51,5 +51,18 @@ public class CoinsViewModel : INotifyPropertyChanged
         field = value;
         OnPropertyChanged(propertyName);
         return true;
+    }
+
+    private ObservableCollection<CoinModel> GetInitialCoins()
+    {
+        return new ObservableCollection<CoinModel>
+        {
+            new CoinModel
+            {
+                Id = "bitcoin", Name = "Bitcoin", Symbol = "BTC", Rank = "1", PriceUsd = "10000",
+                ChangePercent24Hr = "0.5", MarketCapUsd = "100000000000", Supply = "10000000",
+                MaxSupply = "21000000", VolumeUsd24Hr = "1000000000", Vwap24Hr = "10000"
+            }
+        };
     }
 }
