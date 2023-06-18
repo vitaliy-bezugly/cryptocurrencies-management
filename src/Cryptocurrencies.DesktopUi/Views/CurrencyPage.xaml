@@ -11,8 +11,22 @@
         <TextBlock Margin="0 10">Hello from Currency page!</TextBlock>
 
         <TextBlock>Search!</TextBlock>
-        <TextBox></TextBox>
+        <TextBox Text="{Binding CurrencyId}"></TextBox>
+        <Button x:Name="Find" Width="80" HorizontalAlignment="Left" Margin="0 10" Click="Find_OnClick">Find</Button>
         
         <TextBlock Margin="0 10">Info</TextBlock>
+        
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"></ColumnDefinition>
+                <ColumnDefinition Width="3*"></ColumnDefinition>
+                <ColumnDefinition Width="3*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            
+            <StackPanel Grid.Column="0" Orientation="Horizontal">
+                <TextBlock FontSize="16">Name: </TextBlock>
+                <TextBox Text="{Binding Currency.Name}"></TextBox>
+            </StackPanel>
+        </Grid>
     </StackPanel>
 </Page>

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using Cryptocurrencies.DesktopUi.Views;
 
 namespace Cryptocurrencies.DesktopUi;
@@ -30,6 +29,6 @@ public partial class MainWindow : Window
 
     private void ConvertButton_OnClick(object sender, RoutedEventArgs e)
     {
-        throw new NotImplementedException();
+        // throw new NotImplementedException();
     }
 }

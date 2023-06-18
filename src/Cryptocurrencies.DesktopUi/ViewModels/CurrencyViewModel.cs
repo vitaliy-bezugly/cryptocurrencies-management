@@ -1,43 +1,46 @@
+using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using Cryptocurrencies.Application.Coins.GetAllCoinsQuery;
+using Cryptocurrencies.Application.Coins.GetCoinQuery;
 using Cryptocurrencies.Application.Common.Models;
 using MediatR;
 
 namespace Cryptocurrencies.DesktopUi.ViewModels;
 
-public class CoinsViewModel : INotifyPropertyChanged
+public class CurrencyViewModel : INotifyPropertyChanged
 {
     private readonly IMediator _mediator;
-    private ObservableCollection<CoinModel> _coins;
-    
-    public CoinsViewModel(IMediator mediator)
+    private CoinModel _model;
+    private string _currencyId;
+
+    public CurrencyViewModel(IMediator mediator)
     {
         _mediator = mediator;
-
-        _coins = new ObservableCollection<CoinModel>();
+        
+        _model = new CoinModel();
+        _currencyId = String.Empty;
     }
 
-    public ObservableCollection<CoinModel> Coins
+    public CoinModel Currency
     {
-        get => _coins;
-        set => SetField(ref _coins, value);
+        get => _model;
+        set => SetField(ref _model, value);
+    }
+
+    public string CurrencyId
+    {
+        get => _currencyId;
+        set => SetField(ref _currencyId, value);
     }
     
-    public async Task LoadCoinsAsync()
+    public async Task FindCurrencyByIdAsync()
     {
-        var coins = await _mediator.Send(new GetAllCoinsQuery(10));
-        Coins.Clear();
-
-        foreach (var coin in coins)
-        {
-            Coins.Add(coin);
-        }
+        var coin = await _mediator.Send(new GetCoinQuery(_currencyId));
+        Currency = coin;
     }
-    
+
     public event PropertyChangedEventHandler? PropertyChanged;
 
     protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
