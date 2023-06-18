@@ -1,4 +1,3 @@
-using System.Text.Json.Serialization;
 using Cryptocurrencies.Application.Common.Mappings;
 using Cryptocurrencies.Contracts.Dtos;
 
@@ -16,9 +15,9 @@ public record MarketModel : IMapFrom<MarketDto>
     
     public string QuoteSymbol { get; init; } = string.Empty;
     
-    public string VolumeUsd24Hr { get; init; } = string.Empty;
+    public decimal VolumeUsd24Hr { get; init; }
 
-    public string PriceUsd { get; init; } = String.Empty;
+    public decimal PriceUsd { get; init; }
     
-    public string VolumePercent { get; init; } = string.Empty;
+    public double VolumePercent { get; init; }
 }

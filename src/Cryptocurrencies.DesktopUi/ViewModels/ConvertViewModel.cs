@@ -1,4 +1,3 @@
-using System.Globalization;
 using System.Threading.Tasks;
 using Cryptocurrencies.Application.Rates.GetRateByIdQuery;
 using MediatR;
@@ -9,16 +8,16 @@ public class ConvertViewModel : ViewModelBase
 {
     private readonly IMediator _mediator;
     private string _fromCurrency;
-    private string _amountOfDollars;
-    private string _amountOfCurrency;
+    private decimal _amountOfDollars;
+    private decimal _amountOfCurrency;
     
     public ConvertViewModel(IMediator mediator)
     {
         _mediator = mediator;
         
         _fromCurrency = "ukrainian-hryvnia";
-        _amountOfDollars = "Undefined";
-        _amountOfCurrency = "1";
+        _amountOfDollars = 0m;
+        _amountOfCurrency = 1m;
     }
 
     public async Task ConvertAsync()
@@ -26,8 +25,7 @@ public class ConvertViewModel : ViewModelBase
         var rate = await _mediator.Send(new GetRateByIdQuery(_fromCurrency));
         
         // TODO: add it into Mediatr
-        AmountOfDollars = (decimal.Parse(AmountOfCurrency) * decimal.Parse(rate.RateUsd))
-            .ToString(CultureInfo.InvariantCulture);
+        AmountOfDollars = AmountOfCurrency * rate.RateUsd;
     }
     
     public string FromCurrency
@@ -40,7 +38,7 @@ public class ConvertViewModel : ViewModelBase
         }
     }
     
-    public string AmountOfDollars
+    public decimal AmountOfDollars
     {
         get => _amountOfDollars;
         set
@@ -50,7 +48,7 @@ public class ConvertViewModel : ViewModelBase
         }
     }
     
-    public string AmountOfCurrency
+    public decimal AmountOfCurrency
     {
         get => _amountOfCurrency;
         set

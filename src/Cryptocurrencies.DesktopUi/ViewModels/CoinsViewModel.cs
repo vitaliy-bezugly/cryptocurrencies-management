@@ -41,9 +41,9 @@ public class CoinsViewModel : ViewModelBase
         {
             new CoinModel
             {
-                Id = "bitcoin", Name = "Bitcoin", Symbol = "BTC", Rank = "1", PriceUsd = "10000",
-                ChangePercent24Hr = "0.5", MarketCapUsd = "100000000000", Supply = "10000000",
-                MaxSupply = "21000000", VolumeUsd24Hr = "1000000000", Vwap24Hr = "10000"
+                Id = "bitcoin", Name = "Bitcoin", Symbol = "BTC", Rank = 1, PriceUsd = 10000m,
+                ChangePercent24Hr = 0.5d, MarketCapUsd = 100000000000m, Supply = 10000000d,
+                MaxSupply = 21000000d, VolumeUsd24Hr = 1000000000m, Vwap24Hr = 10000m
             }
         };
     }

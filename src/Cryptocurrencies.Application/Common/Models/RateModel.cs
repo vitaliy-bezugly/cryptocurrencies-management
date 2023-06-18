@@ -1,4 +1,3 @@
-using System.Text.Json.Serialization;
 using Cryptocurrencies.Application.Common.Mappings;
 using Cryptocurrencies.Contracts.Dtos;
 
@@ -14,7 +13,5 @@ public record RateModel : IMapFrom<RateDto>
     
     public string Type { get; init; } = string.Empty;
     
-    public string RateUsd { get; init; } = string.Empty;
-    
-    public long Timestamp { get; init; }
+    public decimal RateUsd { get; init; }
 }

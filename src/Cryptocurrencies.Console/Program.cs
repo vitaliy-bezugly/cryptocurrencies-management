@@ -17,13 +17,22 @@ IHost host = Host.CreateDefaultBuilder(args)
 
 await host.StartAsync();
 
-using(host.Services.CreateScope())
+try
 {
-    var services = host.Services;
-    var mediator = services.GetRequiredService<IMediator>();
-    
-    var rate = await mediator.Send(new GetRateByIdQuery("ukrainian-hryvnia"));
-    Console.WriteLine(rate);
-}
+    using (host.Services.CreateScope())
+    {
+        var services = host.Services;
+        var mediator = services.GetRequiredService<IMediator>();
 
-await host.StopAsync();
+        var rate = await mediator.Send(new GetRateByIdQuery("not-found"));
+        Console.WriteLine(rate);
+    }
+}
+catch (Exception e)
+{
+    Console.WriteLine(e);
+}
+finally
+{
+    await host.StopAsync();
+}

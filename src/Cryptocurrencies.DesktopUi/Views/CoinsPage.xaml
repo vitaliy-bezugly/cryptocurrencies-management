@@ -17,6 +17,7 @@
                   FontSize="16" ColumnWidth="*">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}"/>
+                <DataGridTextColumn Header="Rank" Binding="{Binding Path=Rank}"/>
                 <DataGridTextColumn Header="Symbol" Binding="{Binding Path=Symbol}"/>
                 <DataGridHyperlinkColumn Header="Price USD" Binding="{Binding Path=PriceUsd}"/>
                 <DataGridTextColumn Header="Supply" Binding="{Binding Path=Supply}"/>
