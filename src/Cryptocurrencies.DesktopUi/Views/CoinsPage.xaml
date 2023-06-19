@@ -4,13 +4,29 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:Cryptocurrencies.DesktopUi.Views"
+      xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
       mc:Ignorable="d"
       Title="CoinsPage">
+    
+    <Page.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibility">
+        </BooleanToVisibilityConverter>
+    </Page.Resources>
+    
     <StackPanel>
-        <TextBlock Margin="0 10">Hello from Coins page!</TextBlock>
+        <TextBlock Style="{StaticResource TitleOfPage}">Currencies</TextBlock>
+        
+        <Grid Width="300" HorizontalAlignment="Left">
+            <TextBox Margin="20 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
+                     Panel.ZIndex="1" Text="Filter ..." BorderBrush="Transparent" Background="Transparent"
+                     Visibility="{Binding ElementName=textBoxFilter,Path=Text.IsEmpty,Converter={StaticResource BoolToVisibility}}"/>
             
-        <Button Margin="0 10" Content="Load data" Width="120" HorizontalAlignment="Left" Click="ButtonBase_OnClick"></Button>
+            <TextBox x:Name="textBoxFilter" Style="{StaticResource TextBoxSearch}"/>
             
+            <iconPacks:PackIconMaterial Kind="Magnify" Width="15" Height="15" Margin="0 0 15 0" 
+                                        VerticalAlignment="Center" Foreground="#b0b9c6" HorizontalAlignment="Right"/>
+        </Grid>
+        
         <!-- Datagrid -->
         <DataGrid Name="CoinsDataGrid" 
                   Style="{DynamicResource DataGridStyle}"
@@ -27,5 +43,16 @@
                 <DataGridTextColumn Header="Market Cap" Binding="{Binding Path=MarketCapUsd}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
+        
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <Grid Width="200" Margin="0 0 10 0">
+                <TextBox Margin="20 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
+                         Panel.ZIndex="1" Text="Enter the limits ..." BorderBrush="Transparent" Background="Transparent"
+                         Visibility="{Binding ElementName=textBoxLimit,Path=Text.IsEmpty,Converter={StaticResource BoolToVisibility}}"/>
+            
+                <TextBox x:Name="textBoxLimit" Style="{StaticResource DefaultTextBox}"/>
+            </Grid>
+            <Button Style="{StaticResource CustomButton}" Content="Load data" Width="120" Click="ButtonBase_OnClick"></Button>
+        </StackPanel>
     </StackPanel>
 </Page>
