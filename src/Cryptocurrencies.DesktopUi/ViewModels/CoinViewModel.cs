@@ -9,7 +9,7 @@ using MediatR;
 
 namespace Cryptocurrencies.DesktopUi.ViewModels;
 
-public class CurrencyViewModel : ViewModelBase
+public class CoinViewModel : ViewModelBase
 {
     private readonly IMediator _mediator;
     private CoinModel _model;
@@ -17,11 +17,11 @@ public class CurrencyViewModel : ViewModelBase
     private ObservableCollection<MarketModel> _markets;
     private ObservableCollection<CoinHistoryModel> _history;
 
-    public CurrencyViewModel(IMediator mediator)
+    public CoinViewModel(IMediator mediator)
     {
         _mediator = mediator;
-        
-        _model = new CoinModel();
+
+        _model = new CoinModel { Rank = 1, Name = "Unknown" };
         _currencyId = String.Empty;
         
         _markets = new ObservableCollection<MarketModel>();
@@ -29,7 +29,7 @@ public class CurrencyViewModel : ViewModelBase
     }
     
     
-    public async Task FindCurrencyByIdAsync()
+    public async Task FindCoinByIdAsync()
     {
         var coin = await _mediator.Send(new GetCoinQuery(_currencyId));
         Currency = coin;

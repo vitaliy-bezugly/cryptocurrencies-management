@@ -25,7 +25,7 @@ public static class ServiceConfigurator
         services.AddTransient<CoinsViewModel>();
         
         services.AddSingleton<CurrencyPage>();
-        services.AddTransient<CurrencyViewModel>();
+        services.AddTransient<CoinViewModel>();
         
         services.AddSingleton<ConvertPage>();
         services.AddTransient<ConvertViewModel>();

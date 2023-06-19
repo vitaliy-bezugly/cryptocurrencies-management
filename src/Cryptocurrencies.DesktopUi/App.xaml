@@ -288,6 +288,13 @@
             </Style.Resources>
         </Style>
         
+        <Style x:Key="PropertyCard" TargetType="Border">
+            <Setter Property="Background" Value="#1f355e"/>
+            <Setter Property="Margin" Value="0 10 10 10"></Setter>
+            <Setter Property="MinHeight" Value="100"/>
+            <Setter Property="CornerRadius" Value="3"/>
+        </Style>
+        
         <!--#endregion-->
 
     </Application.Resources>

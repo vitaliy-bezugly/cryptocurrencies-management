@@ -4,33 +4,86 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:Cryptocurrencies.DesktopUi.Views"
+      xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
       mc:Ignorable="d"
       FontSize="20"
       Title="CoinPage">
+    
+    <Page.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibility">
+        </BooleanToVisibilityConverter>
+    </Page.Resources>
+    
     <ScrollViewer>
         <StackPanel>
-            <TextBlock Margin="0 10">Hello from Currency page!</TextBlock>
-
-            <TextBlock>Search!</TextBlock>
-            <TextBox Text="{Binding CurrencyId}"></TextBox>
-            <Button x:Name="Find" Width="80" HorizontalAlignment="Left" Margin="0 10" Click="Find_OnClick">Find</Button>
-
-            <TextBlock Margin="0 10">Info</TextBlock>
+            <TextBlock Style="{StaticResource TitleOfPage}">Find specific coin</TextBlock>
+            
+            <Grid Width="300" HorizontalAlignment="Left">
+                <TextBox Margin="20 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
+                         Panel.ZIndex="1" Text="Enter coin name" BorderBrush="Transparent" Background="Transparent" FontSize="14"
+                         Visibility="{Binding ElementName=textBoxFind,Path=Text.IsEmpty,Converter={StaticResource BoolToVisibility}}"/>
+            
+                <TextBox x:Name="textBoxFind" Style="{StaticResource TextBoxSearch}" Text="{Binding CurrencyId}"/>
+            
+                <iconPacks:PackIconMaterial Kind="Magnify" Width="15" Height="15" Margin="0 0 15 0" 
+                                            VerticalAlignment="Center" Foreground="#b0b9c6" HorizontalAlignment="Right"/>
+            </Grid>
+            
+            <Button Style="{StaticResource CustomButton}" Content="Find" Width="120" HorizontalAlignment="Left" Click="Find_OnClick"></Button>
+            
+            <TextBlock Style="{StaticResource TitleOfPage}" FontSize="20">Information: </TextBlock>
 
             <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*"></ColumnDefinition>
-                    <ColumnDefinition Width="3*"></ColumnDefinition>
-                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*" MinWidth="300"></ColumnDefinition>
+                    <ColumnDefinition Width="1*" MinWidth="300"></ColumnDefinition>
+                    <ColumnDefinition Width="1*" MinWidth="300"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-
-                <StackPanel Grid.Column="0" Orientation="Horizontal">
-                    <TextBlock FontSize="16">Name: </TextBlock>
-                    <TextBox Text="{Binding Currency.Name}"></TextBox>
-                </StackPanel>
+                
+                <!-- First row -->
+                <Border Grid.Row="0" Grid.Column="0" Style="{StaticResource PropertyCard}">
+                    <StackPanel Orientation="Vertical" Margin="30 10">
+                        <TextBlock FontSize="24" FontWeight="Bold" Foreground="White" Margin="0 10" Text="{Binding Currency.Rank}" HorizontalAlignment="Left"></TextBlock>
+                        <TextBlock FontSize="14" Foreground="LightGray" Margin="0 10" HorizontalAlignment="Right">Rank</TextBlock>
+                    </StackPanel>
+                </Border>
+                
+                <Border Grid.Row="0" Grid.Column="1" Style="{StaticResource PropertyCard}">
+                    <StackPanel Orientation="Vertical" Margin="30 10">
+                        <TextBlock FontSize="24" FontWeight="Bold" Foreground="White" Margin="0 10" Text="{Binding Currency.Name}" HorizontalAlignment="Left"></TextBlock>
+                        <TextBlock FontSize="14" Foreground="LightGray" Margin="0 10" HorizontalAlignment="Right">Name</TextBlock>
+                    </StackPanel>
+                </Border>
+                
+                <Border Grid.Row="0" Grid.Column="2" Style="{StaticResource PropertyCard}">
+                    <StackPanel Orientation="Vertical" Margin="30 10">
+                        <TextBlock FontSize="24" FontWeight="Bold" Foreground="White" Margin="0 10" Text="{Binding Currency.PriceUsd}" HorizontalAlignment="Left"></TextBlock>
+                        <TextBlock FontSize="14" Foreground="LightGray" Margin="0 10" HorizontalAlignment="Right">Price</TextBlock>
+                    </StackPanel>
+                </Border>
+                
+                <!-- Second row -->
+                <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource PropertyCard}">
+                    <StackPanel Orientation="Vertical" Margin="30 10">
+                        <TextBlock FontSize="24" FontWeight="Bold" Foreground="White" Margin="0 10" Text="{Binding Currency.ChangePercent24Hr}" HorizontalAlignment="Left"></TextBlock>
+                        <TextBlock FontSize="14" Foreground="LightGray" Margin="0 10" HorizontalAlignment="Right">Change percent per 24 hours</TextBlock>
+                    </StackPanel>
+                </Border>
+                
+                <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource PropertyCard}">
+                    <StackPanel Orientation="Vertical" Margin="30 10">
+                        <TextBlock FontSize="24" FontWeight="Bold" Foreground="White" Margin="0 10" Text="{Binding Currency.MarketCapUsd}" HorizontalAlignment="Left"></TextBlock>
+                        <TextBlock FontSize="14" Foreground="LightGray" Margin="0 10" HorizontalAlignment="Right">Market cap</TextBlock>
+                    </StackPanel>
+                </Border>
             </Grid>
 
-            <TextBlock Margin="0 10">History</TextBlock>
+            <TextBlock Style="{StaticResource TitleOfPage}" FontSize="20">Price history: </TextBlock>
             <ListBox ItemsSource="{Binding History}" Margin="0 10">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -44,7 +97,7 @@
                 </ListBox.ItemTemplate>
             </ListBox>
 
-            <TextBlock Margin="0 10">You can buy it on the following markets: </TextBlock>
+            <TextBlock Style="{StaticResource TitleOfPage}" FontSize="20">You can buy it on the following markets: </TextBlock>
             <ListBox ItemsSource="{Binding Markets}" Margin="0 10">
                 <ListBox.ItemTemplate>
                     <DataTemplate>

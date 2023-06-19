@@ -15,9 +15,9 @@ public record MarketModel : IMapFrom<MarketDto>
     
     public string QuoteSymbol { get; init; } = string.Empty;
     
-    public decimal VolumeUsd24Hr { get; init; }
+    public double VolumeUsd24Hr { get; init; }
 
-    public decimal PriceUsd { get; init; }
+    public double PriceUsd { get; init; }
     
     public double VolumePercent { get; init; }
 }

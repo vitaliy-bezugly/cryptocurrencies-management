@@ -6,7 +6,7 @@ namespace Cryptocurrencies.DesktopUi.Views;
 
 public partial class CurrencyPage : Page
 {
-    public CurrencyPage(CurrencyViewModel viewModel)
+    public CurrencyPage(CoinViewModel viewModel)
     {
         InitializeComponent();
         
@@ -15,8 +15,8 @@ public partial class CurrencyPage : Page
 
     private async void Find_OnClick(object sender, RoutedEventArgs e)
     {
-        var vm = DataContext as CurrencyViewModel;
+        var vm = DataContext as CoinViewModel;
         
-        await vm!.FindCurrencyByIdAsync();
+        await vm!.FindCoinByIdAsync();
     }
 }

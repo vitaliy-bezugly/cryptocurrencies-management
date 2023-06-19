@@ -1,3 +1,4 @@
+using AutoMapper;
 using Cryptocurrencies.Application.Common.Mappings;
 using Cryptocurrencies.Contracts.Dtos;
 
@@ -17,13 +18,13 @@ public record CoinModel : IMapFrom<CoinDto>
     
     public double MaxSupply { get; init; }
     
-    public decimal MarketCapUsd { get; init; }
+    public double MarketCapUsd { get; init; }
     
-    public decimal VolumeUsd24Hr { get; init; }
+    public double VolumeUsd24Hr { get; init; }
     
-    public decimal PriceUsd { get; init; }
+    public double PriceUsd { get; init; }
     
     public double ChangePercent24Hr { get; init; }
     
-    public decimal Vwap24Hr { get; init; }
+    public double Vwap24Hr { get; init; }
 }

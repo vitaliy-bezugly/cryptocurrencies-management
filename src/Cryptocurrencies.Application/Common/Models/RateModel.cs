@@ -13,5 +13,5 @@ public record RateModel : IMapFrom<RateDto>
     
     public string Type { get; init; } = string.Empty;
     
-    public decimal RateUsd { get; init; }
+    public double RateUsd { get; init; }
 }
