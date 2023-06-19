@@ -5,7 +5,6 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:Cryptocurrencies.DesktopUi.Views"
       mc:Ignorable="d"
-      FontSize="20"
       Title="CoinsPage">
     <StackPanel>
         <TextBlock Margin="0 10">Hello from Coins page!</TextBlock>
@@ -13,15 +12,19 @@
         <Button Margin="0 10" Content="Load data" Width="120" HorizontalAlignment="Left" Click="ButtonBase_OnClick"></Button>
             
         <!-- Datagrid -->
-        <DataGrid Name="CoinsDataGrid" AutoGenerateColumns="False" ItemsSource="{Binding Coins}" 
-                  FontSize="16" ColumnWidth="*">
+        <DataGrid Name="CoinsDataGrid" 
+                  Style="{DynamicResource DataGridStyle}"
+                  CellStyle="{DynamicResource DataGridCellStyle}"
+                  ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle}"
+                  RowStyle="{DynamicResource DataGridRowStyle}"
+                  ItemsSource="{Binding Coins}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}"/>
-                <DataGridTextColumn Header="Rank" Binding="{Binding Path=Rank}"/>
-                <DataGridTextColumn Header="Symbol" Binding="{Binding Path=Symbol}"/>
-                <DataGridHyperlinkColumn Header="Price USD" Binding="{Binding Path=PriceUsd}"/>
-                <DataGridTextColumn Header="Supply" Binding="{Binding Path=Supply}"/>
-                <DataGridTextColumn Header="Market Cap" Binding="{Binding Path=MarketCapUsd}"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" Width="auto"/>
+                <DataGridTextColumn Header="Rank" Binding="{Binding Path=Rank}" Width="auto"/>
+                <DataGridTextColumn Header="Symbol" Binding="{Binding Path=Symbol}" Width="auto"/>
+                <DataGridTextColumn Header="Price USD" Binding="{Binding Path=PriceUsd}" Width="*"/>
+                <DataGridTextColumn Header="Supply" Binding="{Binding Path=Supply}" Width="*"/>
+                <DataGridTextColumn Header="Market Cap" Binding="{Binding Path=MarketCapUsd}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
     </StackPanel>
