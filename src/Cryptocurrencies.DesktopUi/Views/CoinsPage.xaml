@@ -54,7 +54,8 @@
             
                 <TextBox x:Name="textBoxLimit" Style="{StaticResource DefaultTextBox}" Text="{Binding Limit}"/>
             </Grid>
-            <Button Style="{StaticResource CustomButton}" Content="Load data" Width="120" Click="ButtonBase_OnClick"></Button>
+            <Button Style="{StaticResource CustomButton}" Content="Load data" Width="120"
+                    Command="{Binding LoadCoinsCommand}"></Button>
         </StackPanel>
     </StackPanel>
 </Page>

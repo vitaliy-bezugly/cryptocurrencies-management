@@ -11,7 +11,7 @@
         Background="Transparent"
         ResizeMode="CanResize"
         SizeToContent="WidthAndHeight"
-        MinWidth="900" MinHeight="555"
+        MinWidth="1200" MinHeight="800"
         FontSize="16">
         
     <Border Background="#f5f3fb">

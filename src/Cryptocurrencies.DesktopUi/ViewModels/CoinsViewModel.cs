@@ -2,8 +2,10 @@ using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Cryptocurrencies.Application.Coins.GetAllCoinsQuery;
 using Cryptocurrencies.Application.Common.Models;
+using Cryptocurrencies.DesktopUi.Commands;
 using MediatR;
 
 namespace Cryptocurrencies.DesktopUi.ViewModels;
@@ -42,9 +44,14 @@ public class CoinsViewModel : ViewModelBase
         set
         {
             SetField(ref _nameToFind, value);
-            OrderCoins(_nameToFind);
+            OrderCoins();
         }
     }
+    
+    public ICommand LoadCoinsCommand => new CommandHandler(async () =>
+    {
+        await LoadCoinsAsync();
+    }, () => true);
     
     public async Task LoadCoinsAsync()
     {
@@ -52,6 +59,19 @@ public class CoinsViewModel : ViewModelBase
         
         Coins.Clear();
         foreach (var coin in coins)
+        {
+            Coins.Add(coin);
+        }
+    }
+    
+    private void OrderCoins()
+    {
+        var filteredCoins = Coins
+            .OrderByDescending(c => c.Name.Contains(NameToFind, StringComparison.OrdinalIgnoreCase))
+            .ToList();
+        
+        Coins.Clear();
+        foreach (var coin in filteredCoins)
         {
             Coins.Add(coin);
         }
@@ -68,18 +88,5 @@ public class CoinsViewModel : ViewModelBase
                 MaxSupply = 21000000d, VolumeUsd24Hr = 1000000000m, Vwap24Hr = 10000m
             }
         };
-    }
-    
-    private void OrderCoins(string filter)
-    {
-        var filteredCoins = Coins
-            .OrderByDescending(c => c.Name.Contains(filter, StringComparison.OrdinalIgnoreCase))
-            .ToList();
-        
-        Coins.Clear();
-        foreach (var coin in filteredCoins)
-        {
-            Coins.Add(coin);
-        }
     }
 }

@@ -12,10 +12,4 @@ public partial class CoinsPage : Page
         
         DataContext = coinsViewModel;
     }
-
-    private async void ButtonBase_OnClick(object sender, RoutedEventArgs e)
-    {
-        var viewModel = DataContext as CoinsViewModel;
-        await viewModel!.LoadCoinsAsync();
-    }
 }
