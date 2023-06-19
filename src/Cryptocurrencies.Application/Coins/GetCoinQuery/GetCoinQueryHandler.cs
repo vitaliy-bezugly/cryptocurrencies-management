@@ -22,18 +22,7 @@ public class GetCoinQueryHandler : IRequestHandler<GetCoinQuery, CoinModel>
 
     public async Task<CoinModel> Handle(GetCoinQuery request, CancellationToken cancellationToken)
     {
-        try
-        {
-            var response = await _coinApi.GetCoinByIdAsync(request.Id);
-            return _mapper.Map<CoinModel>(response.Data);
-        }
-        catch (HttpRequestException e)
-        {
-            if(e.StatusCode == HttpStatusCode.NotFound)
-                return new CoinModel { Name = "Not found" };
-            
-            _logger.LogError(e, "Error while getting coin by id");
-            throw;
-        }
+        var response = await _coinApi.GetCoinByIdAsync(request.Id);
+        return _mapper.Map<CoinModel>(response.Data);
     }
 }

@@ -1,31 +1,45 @@
 using System.Threading.Tasks;
-using Cryptocurrencies.Application.Rates.GetRateByIdQuery;
+using System.Windows.Input;
+using Cryptocurrencies.Application.Common.Exceptions;
+using Cryptocurrencies.Application.Rates.ConvertRateQuery;
+using Cryptocurrencies.DesktopUi.Commands;
 using MediatR;
+using Microsoft.Extensions.Logging;
 
 namespace Cryptocurrencies.DesktopUi.ViewModels;
 
 public class ConvertViewModel : ViewModelBase
 {
     private readonly IMediator _mediator;
+    private readonly ILogger<CoinsViewModel> _logger;
     private string _fromCurrency;
-    private double _amountOfDollars;
-    private double _amountOfCurrency;
+    private string _toCurrency;
+    private double _amount;
+    private double _result;
     
-    public ConvertViewModel(IMediator mediator)
+    public ConvertViewModel(IMediator mediator, ILogger<CoinsViewModel> logger)
     {
         _mediator = mediator;
-        
+        _logger = logger;
+
         _fromCurrency = "ukrainian-hryvnia";
-        _amountOfDollars = 0d;
-        _amountOfCurrency = 1d;
+        _toCurrency = "united-states-dollar";
+        _amount = 1d;
+        _result = 0d;
     }
 
     public async Task ConvertAsync()
     {
-        var rate = await _mediator.Send(new GetRateByIdQuery(_fromCurrency));
-        
-        // TODO: add it into Mediatr
-        AmountOfDollars = AmountOfCurrency * rate.RateUsd;
+        try
+        {
+            var result = await _mediator.Send(new ConvertRateQuery(Amount, FromCurrency, ToCurrency));
+            Result = result;
+        }
+        catch (NotFoundException e)
+        {
+            Result = 0;
+            _logger.LogWarning(e.Message);
+        }
     }
     
     public string FromCurrency
@@ -38,23 +52,36 @@ public class ConvertViewModel : ViewModelBase
         }
     }
     
-    public double AmountOfDollars
+    public string ToCurrency
     {
-        get => _amountOfDollars;
+        get => _toCurrency;
         set
         {
-            _amountOfDollars = value;
+            _toCurrency = value;
             OnPropertyChanged();
         }
     }
     
-    public double AmountOfCurrency
+    public double Amount
     {
-        get => _amountOfCurrency;
+        get => _amount;
         set
         {
-            _amountOfCurrency = value;
+            _amount = value;
             OnPropertyChanged();
         }
     }
+    
+    public double Result
+    {
+        get => _result;
+        set
+        {
+            _result = value;
+            OnPropertyChanged();
+        }
+    }
+    
+    public ICommand ConvertCommand => new CommandHandler(async () => await ConvertAsync(), 
+        () => string.IsNullOrEmpty(FromCurrency) == false && string.IsNullOrEmpty(ToCurrency) == false);
 }

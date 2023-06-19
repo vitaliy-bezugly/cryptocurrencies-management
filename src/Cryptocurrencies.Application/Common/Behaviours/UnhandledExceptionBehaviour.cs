@@ -1,3 +1,5 @@
+using System.Net;
+using Cryptocurrencies.Application.Common.Exceptions;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -17,6 +19,16 @@ public class UnhandledExceptionBehaviour<TRequest, TResponse> : IPipelineBehavio
         try
         {
             return await next();
+        }
+        catch (HttpRequestException ex)
+        {
+            if (ex.StatusCode == HttpStatusCode.NotFound)
+            {
+                throw new NotFoundException("Can not find requested resource");
+            }
+            
+            _logger.LogError(ex, $"Request: HttpRequestException for Request {request}");
+            throw;
         }
         catch (Exception ex)
         {

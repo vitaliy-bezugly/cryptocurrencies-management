@@ -18,7 +18,4 @@ public class RateDto
     
     [JsonPropertyName("rateUsd")]
     public string RateUsd { get; init; } = string.Empty;
-    
-    [JsonPropertyName("timestamp")]
-    public long Timestamp { get; init; }
 }

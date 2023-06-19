@@ -25,6 +25,17 @@ public class CoinsViewModel : ViewModelBase
         _nameToFind = string.Empty;
         _coins = new ObservableCollection<CoinModel>();
     }
+    
+    public async Task LoadCoinsAsync()
+    {
+        var coins = await _mediator.Send(new GetAllCoinsQuery(Limit));
+        
+        Coins.Clear();
+        foreach (var coin in coins)
+        {
+            Coins.Add(coin);
+        }
+    }
 
     public ObservableCollection<CoinModel> Coins
     {
@@ -52,17 +63,6 @@ public class CoinsViewModel : ViewModelBase
     {
         await LoadCoinsAsync();
     }, () => true);
-    
-    public async Task LoadCoinsAsync()
-    {
-        var coins = await _mediator.Send(new GetAllCoinsQuery(Limit));
-        
-        Coins.Clear();
-        foreach (var coin in coins)
-        {
-            Coins.Add(coin);
-        }
-    }
 
     private void OrderCoins()
     {

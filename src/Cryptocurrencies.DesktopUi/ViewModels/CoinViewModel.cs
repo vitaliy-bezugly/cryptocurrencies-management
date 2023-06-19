@@ -4,24 +4,28 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Cryptocurrencies.Application.Coins.GetCoinHistoryQuery;
 using Cryptocurrencies.Application.Coins.GetCoinQuery;
+using Cryptocurrencies.Application.Common.Exceptions;
 using Cryptocurrencies.Application.Common.Models;
 using Cryptocurrencies.Application.Markets.GetMarketsPerCoinQuery;
 using Cryptocurrencies.DesktopUi.Commands;
 using MediatR;
+using Microsoft.Extensions.Logging;
 
 namespace Cryptocurrencies.DesktopUi.ViewModels;
 
 public class CoinViewModel : ViewModelBase
 {
     private readonly IMediator _mediator;
+    private readonly ILogger<CoinsViewModel> _logger;
     private CoinModel _model;
     private string _currencyId;
     private ObservableCollection<MarketModel> _markets;
     private ObservableCollection<CoinHistoryModel> _history;
 
-    public CoinViewModel(IMediator mediator)
+    public CoinViewModel(IMediator mediator, ILogger<CoinsViewModel> logger)
     {
         _mediator = mediator;
+        _logger = logger;
 
         _model = new CoinModel { Rank = 1, Name = "Unknown" };
         _currencyId = String.Empty;
@@ -33,29 +37,67 @@ public class CoinViewModel : ViewModelBase
     
     public async Task FindCoinByIdAsync()
     {
-        var coin = await _mediator.Send(new GetCoinQuery(_currencyId));
-        Currency = coin;
+        try
+        {
+            var coin = await _mediator.Send(new GetCoinQuery(_currencyId));
+            Currency = coin;
+        }
+        catch (NotFoundException e)
+        {
+            Currency = new CoinModel
+            {
+                Name = "Not found"
+            };
+            
+            _logger.LogWarning(e.Message);
+        }
     }
     
     public async Task FindMarketsByCurrencyIdAsync()
     {
-        var markets = await _mediator.Send(new GetMarketsPerCoinQuery(_currencyId));
-        
-        _markets.Clear();
-        foreach (var market in markets)
+        try
         {
-            _markets.Add(market);
+            var markets = await _mediator.Send(new GetMarketsPerCoinQuery(_currencyId));
+        
+            Markets.Clear();
+            foreach (var market in markets)
+            {
+                Markets.Add(market);
+            }
+        }
+        catch (NotFoundException e)
+        {
+            Markets.Clear();
+            Markets.Add(new MarketModel
+            {
+                QuoteId = "Undefined", ExchangeId = "Not found", PriceUsd = 0d
+            });
+            
+            _logger.LogWarning(e.Message);
         }
     }
     
     public async Task FindHistoryByCurrencyIdAsync()
     {
-        var history = await _mediator.Send(new GetCoinHistoryQuery(_currencyId, "d1"));
-        
-        _history.Clear();
-        foreach (var coinHistoryModel in history)
+        try
         {
-            _history.Add(coinHistoryModel);
+            var history = await _mediator.Send(new GetCoinHistoryQuery(_currencyId, "d1"));
+        
+            History.Clear();
+            foreach (var coinHistoryModel in history)
+            {
+                History.Add(coinHistoryModel);
+            }
+        }
+        catch (NotFoundException e)
+        {
+            History.Clear();
+            History.Add(new CoinHistoryModel
+            {
+                Time = DateTime.Now, PriceUsd = 0d
+            });
+            
+            _logger.LogWarning(e.Message);
         }
     }
     

@@ -18,19 +18,7 @@ public class GetMarketsPerCoinQueryHandler : IRequestHandler<GetMarketsPerCoinQu
 
     public async Task<IReadOnlyCollection<MarketModel>> Handle(GetMarketsPerCoinQuery request, CancellationToken cancellationToken)
     {
-        try
-        {
-            var response = await _coinApi.GetMarketsAsync(request.CoinId, request.Limit);
-            return _mapper.Map<List<MarketModel>>(response.Data);
-        }
-        catch (HttpRequestException e)
-        {
-            if(e.StatusCode == HttpStatusCode.NotFound)
-            {
-                return new List<MarketModel> { new MarketModel { QuoteId = "Undefined", ExchangeId = "Not found", PriceUsd = 0 } };
-            }
-            
-            throw;
-        }
+        var response = await _coinApi.GetMarketsAsync(request.CoinId, request.Limit);
+        return _mapper.Map<List<MarketModel>>(response.Data);
     }
 }

@@ -5,16 +5,49 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:Cryptocurrencies.DesktopUi.Views"
       mc:Ignorable="d"
-      FontSize="20"
       Title="ConvertPage">
+    
+    <Page.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibility">
+        </BooleanToVisibilityConverter>
+    </Page.Resources>
+    
     <StackPanel>
-        <TextBlock>Search: </TextBlock>
-        <TextBox Text="{Binding AmountOfCurrency}"></TextBox>
-        <TextBox MinWidth="130" Text="{Binding FromCurrency}"></TextBox>
+        <TextBlock Style="{StaticResource TitleOfPage}">Convert</TextBlock>
         
-        <Button Margin="0 10" Click="ButtonBase_OnClick">Convert to $</Button>
+        <Grid Width="300" Margin="0 0 10 0" HorizontalAlignment="Left">
+            <TextBox Margin="20 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
+                     Panel.ZIndex="1" Text="Amount" BorderBrush="Transparent" Background="Transparent" MinWidth="150"
+                     Visibility="{Binding ElementName=textBoxAmount,Path=Text.IsEmpty,Converter={StaticResource BoolToVisibility}}"/>
+            
+            <TextBox x:Name="textBoxAmount" Style="{StaticResource DefaultTextBox}" Text="{Binding Amount}"/>
+        </Grid>
         
-        <TextBlock Margin="0 20 0 0">Amount of dollars: </TextBlock>
-        <TextBlock Text="{Binding AmountOfDollars}"></TextBlock>
+        <Grid Width="300" Margin="0 0 10 0" HorizontalAlignment="Left">
+            <TextBox Margin="20 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
+                     Panel.ZIndex="1" Text="From Currency" BorderBrush="Transparent" Background="Transparent" MinWidth="150"
+                     Visibility="{Binding ElementName=textBoxCoinFrom,Path=Text.IsEmpty,Converter={StaticResource BoolToVisibility}}"/>
+            
+            <TextBox x:Name="textBoxCoinFrom" Style="{StaticResource DefaultTextBox}" Text="{Binding FromCurrency}"/>
+        </Grid>
+        
+        <Grid Width="300" Margin="0 0 10 0" HorizontalAlignment="Left">
+            <TextBox Margin="20 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
+                     Panel.ZIndex="1" Text="To currency" BorderBrush="Transparent" Background="Transparent" MinWidth="150"
+                     Visibility="{Binding ElementName=textBoxCoinTo,Path=Text.IsEmpty,Converter={StaticResource BoolToVisibility}}"/>
+            
+            <TextBox x:Name="textBoxCoinTo" Style="{StaticResource DefaultTextBox}" Text="{Binding ToCurrency}"/>
+        </Grid>
+        
+        <Button Style="{StaticResource CustomButton}" Content="Convert" Width="140"
+                Command="{Binding ConvertCommand}" HorizontalAlignment="Left"></Button>
+        
+        <Grid Width="300" Margin="0 0 10 0" HorizontalAlignment="Left">
+            <TextBox Margin="20 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False" IsReadOnly="True"
+                     Panel.ZIndex="1" Text="Result" BorderBrush="Transparent" Background="Transparent" MinWidth="150"
+                     Visibility="{Binding ElementName=textBoxResult,Path=Text.IsEmpty,Converter={StaticResource BoolToVisibility}}"/>
+            
+            <TextBox x:Name="textBoxResult" Style="{StaticResource DefaultTextBox}" Text="{Binding Result}"/>
+        </Grid>
     </StackPanel>
 </Page>
