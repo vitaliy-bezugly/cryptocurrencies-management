@@ -21,28 +21,30 @@
                      Panel.ZIndex="1" Text="Filter ..." BorderBrush="Transparent" Background="Transparent"
                      Visibility="{Binding ElementName=textBoxFilter,Path=Text.IsEmpty,Converter={StaticResource BoolToVisibility}}"/>
             
-            <TextBox x:Name="textBoxFilter" Style="{StaticResource TextBoxSearch}"/>
+            <TextBox x:Name="textBoxFilter" Style="{StaticResource TextBoxSearch}" Text="{Binding NameToFind}"/>
             
             <iconPacks:PackIconMaterial Kind="Magnify" Width="15" Height="15" Margin="0 0 15 0" 
                                         VerticalAlignment="Center" Foreground="#b0b9c6" HorizontalAlignment="Right"/>
         </Grid>
         
         <!-- Datagrid -->
-        <DataGrid Name="CoinsDataGrid" 
-                  Style="{DynamicResource DataGridStyle}"
-                  CellStyle="{DynamicResource DataGridCellStyle}"
-                  ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle}"
-                  RowStyle="{DynamicResource DataGridRowStyle}"
-                  ItemsSource="{Binding Coins}">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" Width="auto"/>
-                <DataGridTextColumn Header="Rank" Binding="{Binding Path=Rank}" Width="auto"/>
-                <DataGridTextColumn Header="Symbol" Binding="{Binding Path=Symbol}" Width="auto"/>
-                <DataGridTextColumn Header="Price USD" Binding="{Binding Path=PriceUsd}" Width="*"/>
-                <DataGridTextColumn Header="Supply" Binding="{Binding Path=Supply}" Width="*"/>
-                <DataGridTextColumn Header="Market Cap" Binding="{Binding Path=MarketCapUsd}" Width="*"/>
-            </DataGrid.Columns>
-        </DataGrid>
+        <Grid MaxHeight="500">
+            <DataGrid Name="CoinsDataGrid" 
+                      Style="{DynamicResource DataGridStyle}"
+                      CellStyle="{DynamicResource DataGridCellStyle}"
+                      ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle}"
+                      RowStyle="{DynamicResource DataGridRowStyle}"
+                      ItemsSource="{Binding Coins}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" Width="auto"/>
+                    <DataGridTextColumn Header="Rank" Binding="{Binding Path=Rank}" Width="auto"/>
+                    <DataGridTextColumn Header="Symbol" Binding="{Binding Path=Symbol}" Width="auto"/>
+                    <DataGridTextColumn Header="Price USD" Binding="{Binding Path=PriceUsd}" Width="*"/>
+                    <DataGridTextColumn Header="Supply" Binding="{Binding Path=Supply}" Width="*"/>
+                    <DataGridTextColumn Header="Market Cap" Binding="{Binding Path=MarketCapUsd}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
         
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
             <Grid Width="200" Margin="0 0 10 0">
@@ -50,7 +52,7 @@
                          Panel.ZIndex="1" Text="Enter the limits ..." BorderBrush="Transparent" Background="Transparent"
                          Visibility="{Binding ElementName=textBoxLimit,Path=Text.IsEmpty,Converter={StaticResource BoolToVisibility}}"/>
             
-                <TextBox x:Name="textBoxLimit" Style="{StaticResource DefaultTextBox}"/>
+                <TextBox x:Name="textBoxLimit" Style="{StaticResource DefaultTextBox}" Text="{Binding Limit}"/>
             </Grid>
             <Button Style="{StaticResource CustomButton}" Content="Load data" Width="120" Click="ButtonBase_OnClick"></Button>
         </StackPanel>
