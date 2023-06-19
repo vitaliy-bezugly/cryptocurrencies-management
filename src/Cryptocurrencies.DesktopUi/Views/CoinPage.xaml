@@ -29,7 +29,8 @@
                                             VerticalAlignment="Center" Foreground="#b0b9c6" HorizontalAlignment="Right"/>
             </Grid>
             
-            <Button Style="{StaticResource CustomButton}" Content="Find" Width="120" HorizontalAlignment="Left" Click="Find_OnClick"></Button>
+            <Button Style="{StaticResource CustomButton}" Content="Find" Width="120" HorizontalAlignment="Left"
+                    Command="{Binding FindCurrencyCommand}"></Button>
             
             <TextBlock Style="{StaticResource TitleOfPage}" FontSize="20">Information: </TextBlock>
 
@@ -84,32 +85,45 @@
             </Grid>
 
             <TextBlock Style="{StaticResource TitleOfPage}" FontSize="20">Price history: </TextBlock>
-            <ListBox ItemsSource="{Binding History}" Margin="0 10">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Price USD: "></TextBlock>
-                            <TextBlock Text="{Binding PriceUsd}"></TextBlock>
-                            <TextBlock Text="; Time: "></TextBlock>
-                            <TextBlock Text="{Binding Time}"></TextBlock>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+            
+            <!-- History DataGrid -->
+            <Grid MaxHeight="500">
+                <DataGrid Name="HistoryDataGrid" 
+                          Style="{DynamicResource DataGridStyle}"
+                          CellStyle="{DynamicResource DataGridCellStyle}"
+                          ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle}"
+                          RowStyle="{DynamicResource DataGridRowStyle}"
+                          ItemsSource="{Binding History}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Time" Binding="{Binding Path=Time}" Width="auto"/>
+                        <DataGridTextColumn Header="Price" Binding="{Binding Path=PriceUsd}" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+            
+            <Button Style="{StaticResource CustomButton}" Content="Load history" Width="120" HorizontalAlignment="Right"
+              Command="{Binding LoadHistoryCommand}"></Button>
 
             <TextBlock Style="{StaticResource TitleOfPage}" FontSize="20">You can buy it on the following markets: </TextBlock>
-            <ListBox ItemsSource="{Binding Markets}" Margin="0 10">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Market: "></TextBlock>
-                            <TextBlock Text="{Binding ExchangeId}"></TextBlock>
-                            <TextBlock Text="; Price: "></TextBlock>
-                            <TextBlock Text="{Binding PriceUsd}"></TextBlock>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+            
+            <!-- Markets DataGrid -->
+            <Grid MaxHeight="500">
+                <DataGrid Name="MarketsDataGrid" 
+                          Style="{DynamicResource DataGridStyle}"
+                          CellStyle="{DynamicResource DataGridCellStyle}"
+                          ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle}"
+                          RowStyle="{DynamicResource DataGridRowStyle}"
+                          ItemsSource="{Binding Markets}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Quote" Binding="{Binding Path=QuoteId}" Width="auto"/>
+                        <DataGridTextColumn Header="Market" Binding="{Binding Path=ExchangeId}" Width="*"/>
+                        <DataGridTextColumn Header="Price" Binding="{Binding Path=PriceUsd}" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+            
+            <Button Style="{StaticResource CustomButton}" Content="Load markets" Width="120" HorizontalAlignment="Right"
+                    Command="{Binding LoadMarketsCommand}"></Button>
         </StackPanel>
     </ScrollViewer>
 </Page>

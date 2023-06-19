@@ -1,10 +1,12 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Cryptocurrencies.Application.Coins.GetCoinHistoryQuery;
 using Cryptocurrencies.Application.Coins.GetCoinQuery;
 using Cryptocurrencies.Application.Common.Models;
 using Cryptocurrencies.Application.Markets.GetMarketsPerCoinQuery;
+using Cryptocurrencies.DesktopUi.Commands;
 using MediatR;
 
 namespace Cryptocurrencies.DesktopUi.ViewModels;
@@ -80,4 +82,19 @@ public class CoinViewModel : ViewModelBase
         get => _history;
         set => SetField(ref _history, value);
     }
+    
+    public ICommand FindCurrencyCommand => new CommandHandler(async () =>
+    {
+        await FindCoinByIdAsync();
+    }, () => string.IsNullOrEmpty(CurrencyId) == false);
+
+    public ICommand LoadMarketsCommand => new CommandHandler(async () =>
+    {
+        await FindMarketsByCurrencyIdAsync();
+    }, () => string.IsNullOrEmpty(CurrencyId) == false);
+    
+    public ICommand LoadHistoryCommand => new CommandHandler(async () =>
+    {
+        await FindHistoryByCurrencyIdAsync();
+    }, () => string.IsNullOrEmpty(CurrencyId) == false);
 }

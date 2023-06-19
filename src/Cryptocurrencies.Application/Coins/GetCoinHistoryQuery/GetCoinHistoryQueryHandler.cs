@@ -1,3 +1,4 @@
+using System.Net;
 using AutoMapper;
 using Cryptocurrencies.Application.Common.Interfaces;
 using Cryptocurrencies.Application.Common.Models;
@@ -18,7 +19,19 @@ public class GetCoinHistoryQueryHandler : IRequestHandler<GetCoinHistoryQuery, I
 
     public async Task<IReadOnlyCollection<CoinHistoryModel>> Handle(GetCoinHistoryQuery request, CancellationToken cancellationToken)
     {
-        var response = await _coinApi.GetCoinHistoryAsync(request.Id, request.Interval);
-        return _mapper.Map<List<CoinHistoryModel>>(response.Data);
+        try
+        {
+            var response = await _coinApi.GetCoinHistoryAsync(request.Id, request.Interval);
+            return _mapper.Map<List<CoinHistoryModel>>(response.Data);
+        }
+        catch (HttpRequestException e)
+        {
+            if (e.StatusCode == HttpStatusCode.NotFound)
+            {
+                return new List<CoinHistoryModel> { new CoinHistoryModel { PriceUsd = 0, Time = DateTime.MinValue } };    
+            }
+            
+            throw;
+        }
     }
 }

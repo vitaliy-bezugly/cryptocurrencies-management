@@ -12,11 +12,4 @@ public partial class CurrencyPage : Page
         
         DataContext = viewModel;
     }
-
-    private async void Find_OnClick(object sender, RoutedEventArgs e)
-    {
-        var vm = DataContext as CoinViewModel;
-        
-        await vm!.FindCoinByIdAsync();
-    }
 }

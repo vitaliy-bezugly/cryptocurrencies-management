@@ -8,16 +8,16 @@ public class ConvertViewModel : ViewModelBase
 {
     private readonly IMediator _mediator;
     private string _fromCurrency;
-    private decimal _amountOfDollars;
-    private decimal _amountOfCurrency;
+    private double _amountOfDollars;
+    private double _amountOfCurrency;
     
     public ConvertViewModel(IMediator mediator)
     {
         _mediator = mediator;
         
         _fromCurrency = "ukrainian-hryvnia";
-        _amountOfDollars = 0m;
-        _amountOfCurrency = 1m;
+        _amountOfDollars = 0d;
+        _amountOfCurrency = 1d;
     }
 
     public async Task ConvertAsync()
@@ -38,7 +38,7 @@ public class ConvertViewModel : ViewModelBase
         }
     }
     
-    public decimal AmountOfDollars
+    public double AmountOfDollars
     {
         get => _amountOfDollars;
         set
@@ -48,7 +48,7 @@ public class ConvertViewModel : ViewModelBase
         }
     }
     
-    public decimal AmountOfCurrency
+    public double AmountOfCurrency
     {
         get => _amountOfCurrency;
         set

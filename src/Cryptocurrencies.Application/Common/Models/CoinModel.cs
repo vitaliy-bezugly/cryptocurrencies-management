@@ -1,4 +1,3 @@
-using AutoMapper;
 using Cryptocurrencies.Application.Common.Mappings;
 using Cryptocurrencies.Contracts.Dtos;
 

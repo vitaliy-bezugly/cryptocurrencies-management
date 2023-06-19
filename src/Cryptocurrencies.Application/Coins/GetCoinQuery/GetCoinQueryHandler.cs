@@ -30,7 +30,7 @@ public class GetCoinQueryHandler : IRequestHandler<GetCoinQuery, CoinModel>
         catch (HttpRequestException e)
         {
             if(e.StatusCode == HttpStatusCode.NotFound)
-                return new CoinModel();
+                return new CoinModel { Name = "Not found" };
             
             _logger.LogError(e, "Error while getting coin by id");
             throw;
