@@ -18,16 +18,16 @@ public static class ServiceConfigurator
         
         services.AddSingleton<IFrameContainer, FrameContainer>();
 
-        services.AddTransient<MainWindow>();
+        services.AddSingleton<MainWindow>();
         services.AddTransient<MainWindowViewModel>();
         
-        services.AddTransient<CoinsPage>();
+        services.AddSingleton<CoinsPage>();
         services.AddTransient<CoinsViewModel>();
         
-        services.AddTransient<CurrencyPage>();
+        services.AddSingleton<CurrencyPage>();
         services.AddTransient<CurrencyViewModel>();
         
-        services.AddTransient<ConvertPage>();
+        services.AddSingleton<ConvertPage>();
         services.AddTransient<ConvertViewModel>();
         
         return services;

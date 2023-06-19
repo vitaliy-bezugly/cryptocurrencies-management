@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Cryptocurrencies.DesktopUi.Views"
       mc:Ignorable="d"
       FontSize="20"
-      Title="CurrencyPage">
+      Title="CoinPage">
     <ScrollViewer>
         <StackPanel>
             <TextBlock Margin="0 10">Hello from Currency page!</TextBlock>

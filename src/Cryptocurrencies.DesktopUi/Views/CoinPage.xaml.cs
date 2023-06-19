@@ -18,7 +18,5 @@ public partial class CurrencyPage : Page
         var vm = DataContext as CurrencyViewModel;
         
         await vm!.FindCurrencyByIdAsync();
-        await vm!.FindMarketsByCurrencyIdAsync();
-        await vm!.FindHistoryByCurrencyIdAsync();
     }
 }
