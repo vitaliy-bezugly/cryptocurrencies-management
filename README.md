@@ -44,4 +44,9 @@ To run the application, follow these steps:
 Run the application.
 
 ## Images
+![image](https://github.com/vitaliy-bezugly/cryptocurrencies-management/assets/87979065/1601e30d-3e4c-4fb0-9da8-e7477975fe16)
+![image](https://github.com/vitaliy-bezugly/cryptocurrencies-management/assets/87979065/d6d3fca5-cdf4-44a1-8520-ab8852fb639e)
+![image](https://github.com/vitaliy-bezugly/cryptocurrencies-management/assets/87979065/3dd5c1b1-5d3c-4442-bdbf-5c8d9499c26c)
+![image](https://github.com/vitaliy-bezugly/cryptocurrencies-management/assets/87979065/9f7ddf7d-76fd-4f08-bf4b-35af2724e94d)
+![image](https://github.com/vitaliy-bezugly/cryptocurrencies-management/assets/87979065/220d9176-3d31-4d8a-a716-81a976ee33d7)
 
