@@ -28,6 +28,10 @@ public class CoinViewModel : ViewModelBase
     {
         _mediator = mediator;
         _logger = logger;
+
+        // for fix warnings
+        _currencyId = string.Empty;
+        _currency = new CoinModel();
         
         Currency = coinContainer.Coin;
         CurrencyId = coinContainer.Coin.Id;
@@ -130,15 +134,15 @@ public class CoinViewModel : ViewModelBase
     public ICommand FindCurrencyCommand => new UnParametrizedCommandHandler(async () =>
     {
         await FindCoinByIdAsync();
-    }, () => string.IsNullOrEmpty(CurrencyId) == false);
+    }, () => true);
 
     public ICommand LoadMarketsCommand => new UnParametrizedCommandHandler(async () =>
     {
         await FindMarketsByCurrencyIdAsync();
-    }, () => string.IsNullOrEmpty(CurrencyId) == false);
+    }, () => true);
     
     public ICommand LoadHistoryCommand => new UnParametrizedCommandHandler(async () =>
     {
         await FindHistoryByCurrencyIdAsync();
-    }, () => string.IsNullOrEmpty(CurrencyId) == false);
+    }, () => true);
 }
