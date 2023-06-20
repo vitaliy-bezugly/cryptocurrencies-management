@@ -101,8 +101,7 @@ public class CoinsViewModel : ViewModelBase
             Coins.Add(coin);
         }
     }
-
-
+    
     private void OrderCoins()
     {
         var filteredCoins = Coins
