@@ -12,10 +12,4 @@ public partial class ConvertPage : Page
         
         DataContext = viewModel;
     }
-
-    private async void ButtonBase_OnClick(object sender, RoutedEventArgs e)
-    {
-        var viewModel = (ConvertViewModel) DataContext;
-        await viewModel.ConvertAsync();
-    }
 }

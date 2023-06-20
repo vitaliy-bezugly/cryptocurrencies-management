@@ -1,7 +1,10 @@
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Cryptocurrencies.Application.Common.Exceptions;
+using Cryptocurrencies.Application.Common.Models;
 using Cryptocurrencies.Application.Rates.ConvertRateQuery;
+using Cryptocurrencies.Application.Rates.GetAllRatesQuery;
 using Cryptocurrencies.DesktopUi.Commands;
 using Cryptocurrencies.DesktopUi.Constants;
 using MediatR;
@@ -18,7 +21,9 @@ public class ConvertViewModel : ViewModelBase
     private double _amount;
     private double _result;
     private string _convertGearVisibility;
-    
+    private string _getRatesGearVisibility;
+    private ObservableCollection<RateModel> _rates;
+
     public ConvertViewModel(IMediator mediator, ILogger<CoinsViewModel> logger)
     {
         _mediator = mediator;
@@ -29,7 +34,10 @@ public class ConvertViewModel : ViewModelBase
         _amount = 1d;
         _result = 0d;
 
+        _rates = new ObservableCollection<RateModel>();
+
         _convertGearVisibility = Elements.Visibility.Hidden;
+        _getRatesGearVisibility = Elements.Visibility.Hidden;
     }
 
     public string FromCurrency
@@ -71,6 +79,16 @@ public class ConvertViewModel : ViewModelBase
             OnPropertyChanged();
         }
     }
+
+    public ObservableCollection<RateModel> Rates
+    {
+        get => _rates;
+        set
+        {
+            _rates = value;
+            OnPropertyChanged();
+        }
+    }
     
     public string ConvertGearVisibility
     {
@@ -82,6 +100,16 @@ public class ConvertViewModel : ViewModelBase
         }
     }
     
+    public string GetRatesGearVisibility
+    {
+        get => _getRatesGearVisibility;
+        set
+        {
+            _getRatesGearVisibility = value;
+            OnPropertyChanged();
+        }
+    }
+    
     public ICommand ConvertCommand => new UnParametrizedCommandHandler(async () =>
         {
             ConvertGearVisibility = Elements.Visibility.Visible;
@@ -89,8 +117,15 @@ public class ConvertViewModel : ViewModelBase
             ConvertGearVisibility = Elements.Visibility.Hidden;
         }, 
         () => string.IsNullOrEmpty(FromCurrency) == false && string.IsNullOrEmpty(ToCurrency) == false);
+
+    public ICommand GetRatesCommand => new UnParametrizedCommandHandler(async () =>
+    {
+        GetRatesGearVisibility = Elements.Visibility.Visible;
+        await GetRatesAsync();
+        GetRatesGearVisibility = Elements.Visibility.Hidden;
+    }, () => true);
     
-    public async Task ConvertAsync()
+    private async Task ConvertAsync()
     {
         try
         {
@@ -101,6 +136,17 @@ public class ConvertViewModel : ViewModelBase
         {
             Result = -1;
             _logger.LogWarning(e.Message);
+        }
+    }
+
+    private async Task GetRatesAsync()
+    {
+        var result = await _mediator.Send(new GetAllRatesQuery());
+        
+        Rates.Clear();
+        foreach (var rate in result)
+        {
+            Rates.Add(rate);
         }
     }
 }
