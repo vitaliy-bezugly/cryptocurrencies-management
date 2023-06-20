@@ -6,6 +6,7 @@ using System.Windows.Input;
 using Cryptocurrencies.Application.Coins.GetAllCoinsQuery;
 using Cryptocurrencies.Application.Common.Models;
 using Cryptocurrencies.DesktopUi.Commands;
+using Cryptocurrencies.DesktopUi.Constants;
 using Cryptocurrencies.DesktopUi.DIItems;
 using Cryptocurrencies.DesktopUi.Views;
 using MediatR;
@@ -19,9 +20,11 @@ public class CoinsViewModel : ViewModelBase
     private readonly IFrameContainer _frameContainer;
     private readonly ICoinContainer _coinContainer;
     private readonly ILogger<CoinViewModel> _coinViewModelLogger;
+    
     private ObservableCollection<CoinModel> _coins;
     private int _limit;
     private string _nameToFind;
+    private string _gearVisibility;
 
     public CoinsViewModel(IMediator mediator, IFrameContainer frameContainer, ICoinContainer coinContainer, ILogger<CoinViewModel> coinViewModelLogger)
     {
@@ -33,6 +36,7 @@ public class CoinsViewModel : ViewModelBase
         _limit = 10;
         _nameToFind = string.Empty;
         _coins = new ObservableCollection<CoinModel>();
+        _gearVisibility = Elements.Visibility.Hidden;
     }
     
     public async Task LoadCoinsAsync()
@@ -58,19 +62,11 @@ public class CoinsViewModel : ViewModelBase
         set => SetField(ref _limit, value);
     }
     
-    public string NameToFind
-    {
-        get => _nameToFind;
-        set
-        {
-            SetField(ref _nameToFind, value);
-            OrderCoins();
-        }
-    }
-    
     public ICommand LoadCoinsCommand => new UnParametrizedCommandHandler(async () =>
     {
+        GearVisibility = Elements.Visibility.Visible;
         await LoadCoinsAsync();
+        GearVisibility = Elements.Visibility.Hidden;
     }, () => true);
 
     public ICommand GoToCoinCommand => new ParametrizedCommandHandler((obj) =>
@@ -83,6 +79,22 @@ public class CoinsViewModel : ViewModelBase
         _frameContainer.NavigationFrame.NavigationService
             .Navigate(new CoinPage(new CoinViewModel(_mediator, _coinViewModelLogger, _coinContainer)));
     }, obj => obj is not null && obj is string);
+    
+    public string NameToFind
+    {
+        get => _nameToFind;
+        set
+        {
+            SetField(ref _nameToFind, value);
+            OrderCoins();
+        }
+    }
+    
+    public string GearVisibility
+    {
+        get => _gearVisibility;
+        set => SetField(ref _gearVisibility, value);
+    }
 
     private void OrderCoins()
     {

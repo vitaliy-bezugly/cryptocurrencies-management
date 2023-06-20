@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:Cryptocurrencies.DesktopUi.Views"
       xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+      xmlns:fa="http://schemas.fontawesome.io/icons/"
       mc:Ignorable="d"
       FontSize="20"
       Title="CoinPage">
@@ -29,8 +30,13 @@
                                             VerticalAlignment="Center" Foreground="#b0b9c6" HorizontalAlignment="Right"/>
             </Grid>
             
-            <Button Style="{StaticResource CustomButton}" Content="Find" Width="120" HorizontalAlignment="Left"
-                    Command="{Binding FindCurrencyCommand}"></Button>
+            <StackPanel Orientation="Horizontal">
+                <Button Style="{StaticResource CustomButton}" Content="Find" Width="120" HorizontalAlignment="Left"
+                        Command="{Binding FindCurrencyCommand}" Margin="0 10 10 10"></Button>
+                
+                <fa:ImageAwesome Grid.Column="1" Icon="Gear" Spin="True" Visibility="{Binding FindCoinGearVisibility}" SpinDuration="3" 
+                                 Width="30" Height="30" Foreground="DodgerBlue" HorizontalAlignment="Right"/>
+            </StackPanel>
             
             <TextBlock Style="{StaticResource TitleOfPage}" FontSize="20">Information: </TextBlock>
 
@@ -101,8 +107,13 @@
                 </DataGrid>
             </Grid>
             
-            <Button Style="{StaticResource CustomButton}" Content="Load history" Width="120" HorizontalAlignment="Right"
-              Command="{Binding LoadHistoryCommand}"></Button>
+            <StackPanel Orientation="Horizontal">
+                <Button Style="{StaticResource CustomButton}" Content="Load history" Width="120" HorizontalAlignment="Right"
+                        Command="{Binding LoadHistoryCommand}" Margin="0 10 10 10"></Button>
+            
+                <fa:ImageAwesome Grid.Column="1" Icon="Gear" Spin="True" Visibility="{Binding LoadHistoryGearVisibility}" SpinDuration="3" 
+                                 Width="30" Height="30" Foreground="DodgerBlue" HorizontalAlignment="Right"/>
+            </StackPanel>
 
             <TextBlock Style="{StaticResource TitleOfPage}" FontSize="20">You can buy it on the following markets: </TextBlock>
             
@@ -122,8 +133,13 @@
                 </DataGrid>
             </Grid>
             
-            <Button Style="{StaticResource CustomButton}" Content="Load markets" Width="120" HorizontalAlignment="Right"
-                    Command="{Binding LoadMarketsCommand}"></Button>
+            <StackPanel Orientation="Horizontal">
+                <Button Style="{StaticResource CustomButton}" Content="Load markets" Width="120" HorizontalAlignment="Right"
+                        Command="{Binding LoadMarketsCommand}" Margin="0 10 10 10"></Button>
+            
+                <fa:ImageAwesome Grid.Column="1" Icon="Gear" Spin="True" Visibility="{Binding LoadMarketsGearVisibility}" SpinDuration="3" 
+                                 Width="30" Height="30" Foreground="DodgerBlue" HorizontalAlignment="Right"/>
+            </StackPanel>
         </StackPanel>
     </ScrollViewer>
 </Page>

@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:Cryptocurrencies.DesktopUi.Views"
       xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+      xmlns:fa="http://schemas.fontawesome.io/icons/"
       mc:Ignorable="d"
       Title="CoinsPage">
     
@@ -16,15 +17,25 @@
     <StackPanel>
         <TextBlock Style="{StaticResource TitleOfPage}">Currencies</TextBlock>
         
-        <Grid Width="300" HorizontalAlignment="Left">
-            <TextBox Margin="20 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
-                     Panel.ZIndex="1" Text="Filter ..." BorderBrush="Transparent" Background="Transparent"
-                     Visibility="{Binding ElementName=textBoxFilter,Path=Text.IsEmpty,Converter={StaticResource BoolToVisibility}}"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
             
-            <TextBox x:Name="textBoxFilter" Style="{StaticResource TextBoxSearch}" Text="{Binding NameToFind}"/>
+            <Grid Width="300" HorizontalAlignment="Left">
+                <TextBox Margin="20 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False"
+                         Panel.ZIndex="1" Text="Filter ..." BorderBrush="Transparent" Background="Transparent"
+                         Visibility="{Binding ElementName=textBoxFilter,Path=Text.IsEmpty,Converter={StaticResource BoolToVisibility}}"/>
             
-            <iconPacks:PackIconMaterial Kind="Magnify" Width="15" Height="15" Margin="0 0 15 0" 
-                                        VerticalAlignment="Center" Foreground="#b0b9c6" HorizontalAlignment="Right"/>
+                <TextBox x:Name="textBoxFilter" Style="{StaticResource TextBoxSearch}" Text="{Binding NameToFind}"/>
+            
+                <iconPacks:PackIconMaterial Kind="Magnify" Width="15" Height="15" Margin="0 0 15 0" 
+                                            VerticalAlignment="Center" Foreground="#b0b9c6" HorizontalAlignment="Right"/>
+            </Grid>
+        
+            <fa:ImageAwesome Grid.Column="1" Icon="Gear" Spin="True" Visibility="{Binding GearVisibility}" SpinDuration="3" 
+                Width="30" Height="30" Foreground="DodgerBlue" HorizontalAlignment="Right"/>
         </Grid>
         
         <!-- Datagrid -->

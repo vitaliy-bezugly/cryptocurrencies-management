@@ -3,6 +3,7 @@ using System.Windows.Input;
 using Cryptocurrencies.Application.Common.Exceptions;
 using Cryptocurrencies.Application.Rates.ConvertRateQuery;
 using Cryptocurrencies.DesktopUi.Commands;
+using Cryptocurrencies.DesktopUi.Constants;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -16,6 +17,7 @@ public class ConvertViewModel : ViewModelBase
     private string _toCurrency;
     private double _amount;
     private double _result;
+    private string _convertGearVisibility;
     
     public ConvertViewModel(IMediator mediator, ILogger<CoinsViewModel> logger)
     {
@@ -26,22 +28,10 @@ public class ConvertViewModel : ViewModelBase
         _toCurrency = "united-states-dollar";
         _amount = 1d;
         _result = 0d;
+
+        _convertGearVisibility = Elements.Visibility.Hidden;
     }
 
-    public async Task ConvertAsync()
-    {
-        try
-        {
-            var result = await _mediator.Send(new ConvertRateQuery(Amount, FromCurrency, ToCurrency));
-            Result = result;
-        }
-        catch (NotFoundException e)
-        {
-            Result = -1;
-            _logger.LogWarning(e.Message);
-        }
-    }
-    
     public string FromCurrency
     {
         get => _fromCurrency;
@@ -82,6 +72,35 @@ public class ConvertViewModel : ViewModelBase
         }
     }
     
-    public ICommand ConvertCommand => new UnParametrizedCommandHandler(async () => await ConvertAsync(), 
+    public string ConvertGearVisibility
+    {
+        get => _convertGearVisibility;
+        set
+        {
+            _convertGearVisibility = value;
+            OnPropertyChanged();
+        }
+    }
+    
+    public ICommand ConvertCommand => new UnParametrizedCommandHandler(async () =>
+        {
+            ConvertGearVisibility = Elements.Visibility.Visible;
+            await ConvertAsync();
+            ConvertGearVisibility = Elements.Visibility.Hidden;
+        }, 
         () => string.IsNullOrEmpty(FromCurrency) == false && string.IsNullOrEmpty(ToCurrency) == false);
+    
+    public async Task ConvertAsync()
+    {
+        try
+        {
+            var result = await _mediator.Send(new ConvertRateQuery(Amount, FromCurrency, ToCurrency));
+            Result = result;
+        }
+        catch (NotFoundException e)
+        {
+            Result = -1;
+            _logger.LogWarning(e.Message);
+        }
+    }
 }

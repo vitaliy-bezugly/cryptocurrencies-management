@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:Cryptocurrencies.DesktopUi.Views"
+      xmlns:fa="http://schemas.fontawesome.io/icons/"
       mc:Ignorable="d"
       Title="ConvertPage">
     
@@ -39,8 +40,13 @@
             <TextBox x:Name="textBoxCoinTo" Style="{StaticResource DefaultTextBox}" Text="{Binding ToCurrency}"/>
         </Grid>
         
-        <Button Style="{StaticResource CustomButton}" Content="Convert" Width="140"
-                Command="{Binding ConvertCommand}" HorizontalAlignment="Left"></Button>
+        <StackPanel Orientation="Horizontal">
+            <Button Style="{StaticResource CustomButton}" Content="Convert" Width="140" Margin="0 10 10 10"
+                    Command="{Binding ConvertCommand}" HorizontalAlignment="Left"></Button>
+        
+            <fa:ImageAwesome Grid.Column="1" Icon="Gear" Spin="True" Visibility="{Binding ConvertGearVisibility}" SpinDuration="3" 
+                             Width="30" Height="30" Foreground="DodgerBlue" HorizontalAlignment="Right"/>
+        </StackPanel>
         
         <Grid Width="300" Margin="0 0 10 0" HorizontalAlignment="Left">
             <TextBox Margin="20 0" VerticalAlignment="Center" Foreground="#b0b9c6" IsHitTestVisible="False" IsReadOnly="True"

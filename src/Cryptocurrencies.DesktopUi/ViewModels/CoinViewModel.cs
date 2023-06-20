@@ -9,6 +9,7 @@ using Cryptocurrencies.Application.Common.Exceptions;
 using Cryptocurrencies.Application.Common.Models;
 using Cryptocurrencies.Application.Markets.GetMarketsPerCoinQuery;
 using Cryptocurrencies.DesktopUi.Commands;
+using Cryptocurrencies.DesktopUi.Constants;
 using Cryptocurrencies.DesktopUi.DIItems;
 using MediatR;
 using Microsoft.Extensions.Logging;
@@ -23,6 +24,9 @@ public class CoinViewModel : ViewModelBase
     private string _currencyId;
     private ObservableCollection<MarketModel> _markets;
     private ObservableCollection<CoinHistoryModel> _history;
+    private string _findCoinGearVisibility;
+    private string _loadHistoryGearVisibility;
+    private string _loadMarketsGearVisibility;
 
     public CoinViewModel(IMediator mediator, ILogger<CoinViewModel> logger, ICoinContainer coinContainer)
     {
@@ -38,8 +42,74 @@ public class CoinViewModel : ViewModelBase
         
         _markets = new ObservableCollection<MarketModel>();
         _history = new ObservableCollection<CoinHistoryModel>();
+
+        _findCoinGearVisibility = Elements.Visibility.Hidden;
+        _loadMarketsGearVisibility = Elements.Visibility.Hidden;
+        _loadHistoryGearVisibility = Elements.Visibility.Hidden;
+    }
+
+    public CoinModel Currency
+    {
+        get => _currency;
+        set => SetField(ref _currency, value);
+    }
+
+    public string CurrencyId
+    {
+        get => _currencyId;
+        set => SetField(ref _currencyId, value);
+    }
+
+    public ObservableCollection<MarketModel> Markets
+    {
+        get => _markets;
+        set => SetField(ref _markets, value);
     }
     
+    public ObservableCollection<CoinHistoryModel> History
+    {
+        get => _history;
+        set => SetField(ref _history, value);
+    }
+    
+    public string FindCoinGearVisibility
+    {
+        get => _findCoinGearVisibility;
+        set => SetField(ref _findCoinGearVisibility, value);
+    }
+    
+    public string LoadMarketsGearVisibility
+    {
+        get => _loadMarketsGearVisibility;
+        set => SetField(ref _loadMarketsGearVisibility, value);
+    }
+    
+    public string LoadHistoryGearVisibility
+    {
+        get => _loadHistoryGearVisibility;
+        set => SetField(ref _loadHistoryGearVisibility, value);
+    }
+    
+    public ICommand FindCurrencyCommand => new UnParametrizedCommandHandler(async () =>
+    {
+        FindCoinGearVisibility = Elements.Visibility.Visible;
+        await FindCoinByIdAsync();
+        FindCoinGearVisibility = Elements.Visibility.Hidden;
+    }, () => true);
+
+    public ICommand LoadMarketsCommand => new UnParametrizedCommandHandler(async () =>
+    {
+        LoadMarketsGearVisibility = Elements.Visibility.Visible;
+        await FindMarketsByCurrencyIdAsync();
+        LoadMarketsGearVisibility = Elements.Visibility.Hidden;
+    }, () => true);
+    
+    public ICommand LoadHistoryCommand => new UnParametrizedCommandHandler(async () =>
+    {
+        LoadHistoryGearVisibility = Elements.Visibility.Visible;
+        await FindHistoryByCurrencyIdAsync();
+        LoadHistoryGearVisibility = Elements.Visibility.Hidden;
+    }, () => true);
     
     public async Task FindCoinByIdAsync()
     {
@@ -106,43 +176,4 @@ public class CoinViewModel : ViewModelBase
             _logger.LogWarning(e.Message);
         }
     }
-    
-    public CoinModel Currency
-    {
-        get => _currency;
-        set => SetField(ref _currency, value);
-    }
-
-    public string CurrencyId
-    {
-        get => _currencyId;
-        set => SetField(ref _currencyId, value);
-    }
-
-    public ObservableCollection<MarketModel> Markets
-    {
-        get => _markets;
-        set => SetField(ref _markets, value);
-    }
-    
-    public ObservableCollection<CoinHistoryModel> History
-    {
-        get => _history;
-        set => SetField(ref _history, value);
-    }
-    
-    public ICommand FindCurrencyCommand => new UnParametrizedCommandHandler(async () =>
-    {
-        await FindCoinByIdAsync();
-    }, () => true);
-
-    public ICommand LoadMarketsCommand => new UnParametrizedCommandHandler(async () =>
-    {
-        await FindMarketsByCurrencyIdAsync();
-    }, () => true);
-    
-    public ICommand LoadHistoryCommand => new UnParametrizedCommandHandler(async () =>
-    {
-        await FindHistoryByCurrencyIdAsync();
-    }, () => true);
 }
