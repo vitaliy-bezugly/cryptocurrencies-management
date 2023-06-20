@@ -15,7 +15,9 @@ public record CoinHistoryModel : IMapFrom<CoinHistoryDto>
         profile.CreateMap<CoinHistoryDto, CoinHistoryModel>()
             .ForMember(dest => dest.Time, 
                 opt => 
-                    opt.MapFrom(src => UnixTimeStampToDateTime(src.Time)));
+                    opt.MapFrom(src => UnixTimeStampToDateTime(src.Time)))
+            .ForMember(dest => dest.PriceUsd, 
+                opt => opt.MapFrom(src => Math.Round(double.Parse(src.PriceUsd), 4)));
     }
     
     public static DateTime UnixTimeStampToDateTime(long unixTimeStamp )

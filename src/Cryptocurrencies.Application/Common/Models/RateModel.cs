@@ -1,3 +1,4 @@
+using AutoMapper;
 using Cryptocurrencies.Application.Common.Mappings;
 using Cryptocurrencies.Contracts.Dtos;
 
@@ -14,4 +15,11 @@ public record RateModel : IMapFrom<RateDto>
     public string Type { get; init; } = string.Empty;
     
     public double RateUsd { get; init; }
+    
+    public void Mapping(Profile profile)
+    {
+        profile.CreateMap<RateDto, RateModel>()
+            .ForMember(dest => dest.RateUsd,
+                opt => opt.MapFrom(src => Math.Round(double.Parse(src.RateUsd), 4)));
+    }
 }

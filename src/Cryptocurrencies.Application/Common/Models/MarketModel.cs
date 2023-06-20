@@ -1,3 +1,4 @@
+using AutoMapper;
 using Cryptocurrencies.Application.Common.Mappings;
 using Cryptocurrencies.Contracts.Dtos;
 
@@ -20,4 +21,11 @@ public record MarketModel : IMapFrom<MarketDto>
     public double PriceUsd { get; init; }
     
     public double VolumePercent { get; init; }
+
+    public void Mapping(Profile profile)
+    {
+        profile.CreateMap<MarketDto, MarketModel>()
+            .ForMember(dest => dest.PriceUsd,
+                opt => opt.MapFrom(src => Math.Round(double.Parse(src.PriceUsd), 4)));
+    }
 }

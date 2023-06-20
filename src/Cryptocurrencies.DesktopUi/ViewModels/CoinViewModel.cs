@@ -1,5 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Cryptocurrencies.Application.Coins.GetCoinHistoryQuery;
@@ -84,7 +85,7 @@ public class CoinViewModel : ViewModelBase
             var history = await _mediator.Send(new GetCoinHistoryQuery(_currencyId, "d1"));
         
             History.Clear();
-            foreach (var coinHistoryModel in history)
+            foreach (var coinHistoryModel in history.OrderByDescending(x => x.Time))
             {
                 History.Add(coinHistoryModel);
             }
