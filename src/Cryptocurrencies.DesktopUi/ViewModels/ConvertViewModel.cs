@@ -37,7 +37,7 @@ public class ConvertViewModel : ViewModelBase
         }
         catch (NotFoundException e)
         {
-            Result = 0;
+            Result = -1;
             _logger.LogWarning(e.Message);
         }
     }
@@ -82,6 +82,6 @@ public class ConvertViewModel : ViewModelBase
         }
     }
     
-    public ICommand ConvertCommand => new CommandHandler(async () => await ConvertAsync(), 
+    public ICommand ConvertCommand => new UnParametrizedCommandHandler(async () => await ConvertAsync(), 
         () => string.IsNullOrEmpty(FromCurrency) == false && string.IsNullOrEmpty(ToCurrency) == false);
 }

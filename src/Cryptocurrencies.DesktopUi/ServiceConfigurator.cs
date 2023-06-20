@@ -17,18 +17,19 @@ public static class ServiceConfigurator
         });
         
         services.AddSingleton<IFrameContainer, FrameContainer>();
+        services.AddSingleton<ICoinContainer, CoinContainer>();
 
         services.AddSingleton<MainWindow>();
-        services.AddTransient<MainWindowViewModel>();
+        services.AddSingleton<MainWindowViewModel>();
         
         services.AddSingleton<CoinsPage>();
-        services.AddTransient<CoinsViewModel>();
+        services.AddSingleton<CoinsViewModel>();
         
-        services.AddSingleton<CurrencyPage>();
-        services.AddTransient<CoinViewModel>();
+        services.AddSingleton<CoinPage>();
+        services.AddSingleton<CoinViewModel>();
         
         services.AddSingleton<ConvertPage>();
-        services.AddTransient<ConvertViewModel>();
+        services.AddSingleton<ConvertViewModel>();
         
         return services;
     }

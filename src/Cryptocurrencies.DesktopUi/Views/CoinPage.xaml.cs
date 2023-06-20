@@ -1,12 +1,11 @@
-using System.Windows;
 using System.Windows.Controls;
 using Cryptocurrencies.DesktopUi.ViewModels;
 
 namespace Cryptocurrencies.DesktopUi.Views;
 
-public partial class CurrencyPage : Page
+public partial class CoinPage : Page
 {
-    public CurrencyPage(CoinViewModel viewModel)
+    public CoinPage(CoinViewModel viewModel)
     {
         InitializeComponent();
         

@@ -10,11 +10,14 @@ public static class ServiceConfigurator
     public static IServiceCollection AddInfrastructureServices(this IServiceCollection services)
     {
         services.AddScoped<ICoinApi, CoinCapApi>();
+        
         services.AddHttpClient<ICoinApi, CoinCapApi>(client =>
         {
             client.BaseAddress = new Uri(ApiRoutes.CoinCap.Base);
         });
         
+        services.Decorate<ICoinApi, CoinApiValidationDecorator>();
+
         return services;
     }
 }

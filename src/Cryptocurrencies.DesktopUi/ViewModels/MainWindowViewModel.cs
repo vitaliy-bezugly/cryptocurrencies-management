@@ -8,29 +8,29 @@ namespace Cryptocurrencies.DesktopUi.ViewModels;
 public class MainWindowViewModel : ViewModelBase
 {
     private readonly IFrameContainer _frameContainer;
-    private readonly CurrencyPage _currencyPage;
+    private readonly CoinPage _coinPage;
     private readonly CoinsPage _coinsPage;
     private readonly ConvertPage _convertPage;
 
-    public MainWindowViewModel(IFrameContainer frameContainerContainer, CurrencyPage currencyPage, CoinsPage coinsPage, ConvertPage convertPage)
+    public MainWindowViewModel(IFrameContainer frameContainerContainer, CoinPage coinPage, CoinsPage coinsPage, ConvertPage convertPage)
     {
         _frameContainer = frameContainerContainer;
-        _currencyPage = currencyPage;
+        _coinPage = coinPage;
         _coinsPage = coinsPage;
         _convertPage = convertPage;
     }
 
-    public ICommand GoToCurrencyCommand => new CommandHandler(() =>
+    public ICommand GoToCurrencyCommand => new UnParametrizedCommandHandler(() =>
     {
-        _frameContainer.NavigationFrame.NavigationService.Navigate(_currencyPage);
+        _frameContainer.NavigationFrame.NavigationService.Navigate(_coinPage);
     }, () => true);
     
-    public ICommand GoToCoinsCommand => new CommandHandler(() =>
+    public ICommand GoToCoinsCommand => new UnParametrizedCommandHandler(() =>
     {
         _frameContainer.NavigationFrame.NavigationService.Navigate(_coinsPage);
     }, () => true);
     
-    public ICommand GoToConvertCommand => new CommandHandler(() =>
+    public ICommand GoToConvertCommand => new UnParametrizedCommandHandler(() =>
     {
         _frameContainer.NavigationFrame.NavigationService.Navigate(_convertPage);
     }, () => true);

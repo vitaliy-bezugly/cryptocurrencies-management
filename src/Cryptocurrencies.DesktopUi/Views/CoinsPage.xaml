@@ -42,6 +42,15 @@
                     <DataGridTextColumn Header="Price USD" Binding="{Binding Path=PriceUsd}" Width="*"/>
                     <DataGridTextColumn Header="Supply" Binding="{Binding Path=Supply}" Width="*"/>
                     <DataGridTextColumn Header="Market Cap" Binding="{Binding Path=MarketCapUsd}" Width="*"/>
+                    <DataGridTemplateColumn Header="Details" Width="auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Command="{Binding DataContext.GoToCoinCommand, 
+                                          RelativeSource={RelativeSource AncestorType=Page}}"
+                                        CommandParameter="{Binding Id}">-</Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

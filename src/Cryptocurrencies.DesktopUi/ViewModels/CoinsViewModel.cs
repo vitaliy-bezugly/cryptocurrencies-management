@@ -6,21 +6,30 @@ using System.Windows.Input;
 using Cryptocurrencies.Application.Coins.GetAllCoinsQuery;
 using Cryptocurrencies.Application.Common.Models;
 using Cryptocurrencies.DesktopUi.Commands;
+using Cryptocurrencies.DesktopUi.DIItems;
+using Cryptocurrencies.DesktopUi.Views;
 using MediatR;
+using Microsoft.Extensions.Logging;
 
 namespace Cryptocurrencies.DesktopUi.ViewModels;
 
 public class CoinsViewModel : ViewModelBase
 {
     private readonly IMediator _mediator;
+    private readonly IFrameContainer _frameContainer;
+    private readonly ICoinContainer _coinContainer;
+    private readonly ILogger<CoinViewModel> _coinViewModelLogger;
+    private ObservableCollection<CoinModel> _coins;
     private int _limit;
     private string _nameToFind;
-    private ObservableCollection<CoinModel> _coins;
 
-    public CoinsViewModel(IMediator mediator)
+    public CoinsViewModel(IMediator mediator, IFrameContainer frameContainer, ICoinContainer coinContainer, ILogger<CoinViewModel> coinViewModelLogger)
     {
         _mediator = mediator;
-        
+        _frameContainer = frameContainer;
+        _coinContainer = coinContainer;
+        _coinViewModelLogger = coinViewModelLogger;
+
         _limit = 10;
         _nameToFind = string.Empty;
         _coins = new ObservableCollection<CoinModel>();
@@ -59,10 +68,21 @@ public class CoinsViewModel : ViewModelBase
         }
     }
     
-    public ICommand LoadCoinsCommand => new CommandHandler(async () =>
+    public ICommand LoadCoinsCommand => new UnParametrizedCommandHandler(async () =>
     {
         await LoadCoinsAsync();
     }, () => true);
+
+    public ICommand GoToCoinCommand => new ParametrizedCommandHandler((obj) =>
+    {
+        if (obj is null)
+            return;
+        string coinId = (string)obj;
+        
+        _coinContainer.Coin = Coins.First(x => x.Id == coinId);
+        _frameContainer.NavigationFrame.NavigationService
+            .Navigate(new CoinPage(new CoinViewModel(_mediator, _coinViewModelLogger, _coinContainer)));
+    }, obj => obj is not null && obj is string);
 
     private void OrderCoins()
     {

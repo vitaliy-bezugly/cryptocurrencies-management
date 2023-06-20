@@ -9,6 +9,7 @@ using Cryptocurrencies.Application.Common.Exceptions;
 using Cryptocurrencies.Application.Common.Models;
 using Cryptocurrencies.Application.Markets.GetMarketsPerCoinQuery;
 using Cryptocurrencies.DesktopUi.Commands;
+using Cryptocurrencies.DesktopUi.DIItems;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -17,19 +18,19 @@ namespace Cryptocurrencies.DesktopUi.ViewModels;
 public class CoinViewModel : ViewModelBase
 {
     private readonly IMediator _mediator;
-    private readonly ILogger<CoinsViewModel> _logger;
-    private CoinModel _model;
+    private readonly ILogger<CoinViewModel> _logger;
+    private CoinModel _currency;
     private string _currencyId;
     private ObservableCollection<MarketModel> _markets;
     private ObservableCollection<CoinHistoryModel> _history;
 
-    public CoinViewModel(IMediator mediator, ILogger<CoinsViewModel> logger)
+    public CoinViewModel(IMediator mediator, ILogger<CoinViewModel> logger, ICoinContainer coinContainer)
     {
         _mediator = mediator;
         _logger = logger;
-
-        _model = new CoinModel { Rank = 1, Name = "Unknown" };
-        _currencyId = String.Empty;
+        
+        Currency = coinContainer.Coin;
+        CurrencyId = coinContainer.Coin.Id;
         
         _markets = new ObservableCollection<MarketModel>();
         _history = new ObservableCollection<CoinHistoryModel>();
@@ -104,8 +105,8 @@ public class CoinViewModel : ViewModelBase
     
     public CoinModel Currency
     {
-        get => _model;
-        set => SetField(ref _model, value);
+        get => _currency;
+        set => SetField(ref _currency, value);
     }
 
     public string CurrencyId
@@ -126,17 +127,17 @@ public class CoinViewModel : ViewModelBase
         set => SetField(ref _history, value);
     }
     
-    public ICommand FindCurrencyCommand => new CommandHandler(async () =>
+    public ICommand FindCurrencyCommand => new UnParametrizedCommandHandler(async () =>
     {
         await FindCoinByIdAsync();
     }, () => string.IsNullOrEmpty(CurrencyId) == false);
 
-    public ICommand LoadMarketsCommand => new CommandHandler(async () =>
+    public ICommand LoadMarketsCommand => new UnParametrizedCommandHandler(async () =>
     {
         await FindMarketsByCurrencyIdAsync();
     }, () => string.IsNullOrEmpty(CurrencyId) == false);
     
-    public ICommand LoadHistoryCommand => new CommandHandler(async () =>
+    public ICommand LoadHistoryCommand => new UnParametrizedCommandHandler(async () =>
     {
         await FindHistoryByCurrencyIdAsync();
     }, () => string.IsNullOrEmpty(CurrencyId) == false);

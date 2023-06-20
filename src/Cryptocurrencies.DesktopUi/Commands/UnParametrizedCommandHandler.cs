@@ -3,12 +3,12 @@ using System.Windows.Input;
 
 namespace Cryptocurrencies.DesktopUi.Commands;
 
-public class CommandHandler : ICommand
+public class UnParametrizedCommandHandler : ICommand
 {
     private readonly Action _execute;
     private readonly Func<bool> _canExecute;
     
-    public CommandHandler(Action execute, Func<bool> canExecute)
+    public UnParametrizedCommandHandler(Action execute, Func<bool> canExecute)
     {
         _execute = execute;
         _canExecute = canExecute;
