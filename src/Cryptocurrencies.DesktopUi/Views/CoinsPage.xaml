@@ -29,9 +29,6 @@
                          Visibility="{Binding ElementName=textBoxFilter,Path=Text.IsEmpty,Converter={StaticResource BoolToVisibility}}"/>
             
                 <TextBox x:Name="textBoxFilter" Style="{StaticResource TextBoxSearch}" Text="{Binding NameToFind}"/>
-            
-                <iconPacks:PackIconMaterial Kind="Magnify" Width="15" Height="15" Margin="0 0 15 0" 
-                                            VerticalAlignment="Center" Foreground="#b0b9c6" HorizontalAlignment="Right"/>
             </Grid>
         
             <fa:ImageAwesome Grid.Column="1" Icon="Gear" Spin="True" Visibility="{Binding GearVisibility}" SpinDuration="3" 

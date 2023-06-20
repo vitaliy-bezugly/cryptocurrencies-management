@@ -39,17 +39,6 @@ public class CoinsViewModel : ViewModelBase
         _gearVisibility = Elements.Visibility.Hidden;
     }
     
-    public async Task LoadCoinsAsync()
-    {
-        var coins = await _mediator.Send(new GetAllCoinsQuery(Limit));
-        
-        Coins.Clear();
-        foreach (var coin in coins)
-        {
-            Coins.Add(coin);
-        }
-    }
-
     public ObservableCollection<CoinModel> Coins
     {
         get => _coins;
@@ -59,7 +48,29 @@ public class CoinsViewModel : ViewModelBase
     public int Limit
     {
         get => _limit;
-        set => SetField(ref _limit, value);
+        set
+        {
+            if (value > 2000)
+                SetField(ref _limit, 2000);
+            else
+                SetField(ref _limit, value);
+        }
+    }
+    
+    public string GearVisibility
+    {
+        get => _gearVisibility;
+        set => SetField(ref _gearVisibility, value);
+    }
+    
+    public string NameToFind
+    {
+        get => _nameToFind;
+        set
+        {
+            SetField(ref _nameToFind, value);
+            OrderCoins();
+        }
     }
     
     public ICommand LoadCoinsCommand => new UnParametrizedCommandHandler(async () =>
@@ -79,22 +90,18 @@ public class CoinsViewModel : ViewModelBase
         _frameContainer.NavigationFrame.NavigationService
             .Navigate(new CoinPage(new CoinViewModel(_mediator, _coinViewModelLogger, _coinContainer)));
     }, obj => obj is not null && obj is string);
-    
-    public string NameToFind
+
+    private async Task LoadCoinsAsync()
     {
-        get => _nameToFind;
-        set
+        var coins = await _mediator.Send(new GetAllCoinsQuery(Limit));
+        
+        Coins.Clear();
+        foreach (var coin in coins)
         {
-            SetField(ref _nameToFind, value);
-            OrderCoins();
+            Coins.Add(coin);
         }
     }
-    
-    public string GearVisibility
-    {
-        get => _gearVisibility;
-        set => SetField(ref _gearVisibility, value);
-    }
+
 
     private void OrderCoins()
     {

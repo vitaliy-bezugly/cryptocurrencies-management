@@ -95,23 +95,23 @@ public class CoinViewModel : ViewModelBase
         FindCoinGearVisibility = Elements.Visibility.Visible;
         await FindCoinByIdAsync();
         FindCoinGearVisibility = Elements.Visibility.Hidden;
-    }, () => true);
+    }, () => string.IsNullOrEmpty(CurrencyId) == false);
 
     public ICommand LoadMarketsCommand => new UnParametrizedCommandHandler(async () =>
     {
         LoadMarketsGearVisibility = Elements.Visibility.Visible;
         await FindMarketsByCurrencyIdAsync();
         LoadMarketsGearVisibility = Elements.Visibility.Hidden;
-    }, () => true);
+    }, () => string.IsNullOrEmpty(CurrencyId) == false);
     
     public ICommand LoadHistoryCommand => new UnParametrizedCommandHandler(async () =>
     {
         LoadHistoryGearVisibility = Elements.Visibility.Visible;
         await FindHistoryByCurrencyIdAsync();
         LoadHistoryGearVisibility = Elements.Visibility.Hidden;
-    }, () => true);
-    
-    public async Task FindCoinByIdAsync()
+    }, () => string.IsNullOrEmpty(CurrencyId) == false);
+
+    private async Task FindCoinByIdAsync()
     {
         try
         {
@@ -129,7 +129,7 @@ public class CoinViewModel : ViewModelBase
         }
     }
     
-    public async Task FindMarketsByCurrencyIdAsync()
+    private async Task FindMarketsByCurrencyIdAsync()
     {
         try
         {
@@ -153,7 +153,7 @@ public class CoinViewModel : ViewModelBase
         }
     }
     
-    public async Task FindHistoryByCurrencyIdAsync()
+    private async Task FindHistoryByCurrencyIdAsync()
     {
         try
         {
